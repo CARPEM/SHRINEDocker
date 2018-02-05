@@ -27,8 +27,9 @@ COPY i2b2webclient-1707.zip /root/$wizardVer/packages
 COPY axis2-1.6.2-war.zip /root/$wizardVer/packages
 COPY apache-ant-1.8.2-bin.zip /root/$wizardVer/packages
 COPY jbossfiles /root/$wizardVer/packages/jbossfiles 
-RUN cat  /root/$wizardVer/packages/jbossfiles/jbosssplit* > /root/$wizardVer/packages/jboss-as-7.1.1.Final.zip
-COPY jboss-as-7.1.1.Final.zip /root/$wizardVer/packages
+#RUN cat  /root/$wizardVer/packages/jbossfiles/jbosssplit* > /root/$wizardVer/packages/jboss-as-7.1.1.Final.zip
+#COPY jboss-as-7.1.1.Final.zip /root/$wizardVer/packages
+RUN wget http://download.jboss.org/jbossas/7.1/jboss-as-7.1.1.Final/jboss-as-7.1.1.Final.zip -P /root/$wizardVer/packages
 
 #COPY oracle-xe-universal_10.2.0.1-1.1_i386.deb /root/$wizardVer/packages
 #COPY libaio_0.3.104-1_i386.deb /root/$wizardVer/packages
