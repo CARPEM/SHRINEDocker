@@ -29,6 +29,14 @@ i2b2_SOURCE=$ROOTDIRECTORY/$i2b2_SOURCE_DIR_NAME
 echo 'repertoire i2b2 ==> ' $i2b2_source
 #/$i2b2_SOURCE_DIR_NAME
 
+
+###########################################################
+#
+# This part of the code is mostly from Florian Endel 
+# (https://github.com/FlorianEndel/i2b2-Docker/blob/master/4.1%20i2b2%20Server%20Common/Dockerfile) 
+#
+# Sets up i2b2 app with parameters  
+
 ###########################
 #Server-commons
 cd $i2b2_SOURCE/edu.harvard.i2b2.server-common/
@@ -288,6 +296,12 @@ sed -i "s#\${edu.harvard.i2b2.im.applicationdir}#\${jboss.home}/standalone/confi
 
 $ANT_HOME/bin/ant -f master_build.xml clean build-all deploy
 
+#################################
+#
+# End of FLorian Endel's code
+# (https://github.com/FlorianEndel/i2b2-Docker/blob/master/4.1%20i2b2%20Server%20Common/Dockerfile) 
+#
+# 
 
 ###################
 #Install axis 2
