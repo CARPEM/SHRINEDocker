@@ -1,0 +1,69 @@
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "en_US.utf8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/data ... ok
+creating subdirectories ... ok
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting dynamic shared memory implementation ... posix
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... ok
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+waiting for server to start....2017-10-10 17:53:02.853 UTC [38] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2017-10-10 17:53:02.853 UTC [38] LOG:  could not bind IPv6 address "::1": Cannot assign requested address
+2017-10-10 17:53:02.853 UTC [38] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2017-10-10 17:53:02.873 UTC [38] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2017-10-10 17:53:02.919 UTC [39] LOG:  database system was shut down at 2017-10-10 17:53:01 UTC
+2017-10-10 17:53:02.938 UTC [38] LOG:  database system is ready to accept connections
+ done
+server started
+CREATE DATABASE
+
+CREATE ROLE
+
+
+/usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/01initdb.sql
+CREATE SCHEMA
+CREATE ROLE
+GRANT
+CREATE SCHEMA
+CREATE ROLE
+GRANT
+CREATE SCHEMA
+CREATE ROLE
+GRANT
+CREATE SCHEMA
+CREATE ROLE
+GRANT
+CREATE SCHEMA
+CREATE ROLE
+GRANT
+CREATE SCHEMA
+CREATE ROLE
+GRANT
+2017-10-10 17:53:03.690 UTC [51] WARNING:  there is no transaction in progress
+COMMIT
+
+
+2017-10-10 17:53:03.695 UTC [38] LOG:  received fast shutdown request
+waiting for server to shut down....2017-10-10 17:53:03.711 UTC [38] LOG:  aborting any active transactions
+2017-10-10 17:53:03.716 UTC [38] LOG:  worker process: logical replication launcher (PID 45) exited with exit code 1
+2017-10-10 17:53:03.717 UTC [40] LOG:  shutting down
+2017-10-10 17:53:03.803 UTC [38] LOG:  database system is shut down
+ done
+server stopped
+
+PostgreSQL init process complete; ready for start up.
+

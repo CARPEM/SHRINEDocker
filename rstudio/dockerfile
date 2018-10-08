@@ -1,0 +1,4 @@
+FROM rocker/rstudio
+
+RUN apt-get update \
+	&& apt-get install openjdk-8-jdk unixodbc-dev unixodbc-bin unixodbc -y \

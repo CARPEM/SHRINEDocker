@@ -1,0 +1,32 @@
+# Use postgres/example user/password credentials
+version: "3.1"
+
+services:
+
+    i2b2dataloader:
+       build: ./i2b2data
+       restart: "no"
+       environment:
+         SECRETS: /run/secrets/secrets
+       secrets:
+         - secrets
+
+    shrinedataloader:
+       build: ./shrineData
+       restart: "no"
+       environment:
+         SECRETS: /run/secrets/secrets
+       secrets:
+         - secrets
+
+    osirisontologyloader:
+       build: ./osirisOntologyLoader
+       restart: "no"
+       environment:
+         SECRETS: /run/secrets/secrets
+       secrets:
+         - secrets
+
+secrets:
+  secrets:
+    file: secrets.txt

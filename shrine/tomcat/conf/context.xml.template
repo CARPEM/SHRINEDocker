@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- The contents of this file will be loaded for each web application -->
+ 
+<Context>
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <Resource name="jdbc/problemDB" auth="Container" type="javax.sql.DataSource"
+              maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+              username="<MYSQL_USER>" password="<MYSQL_PASSWORD>" driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://<SHRINE_DB_HOST>:<SHRINE_DB_PORT>/shrine_query_history"
+              testOnBorrow="true" validationQuery="SELECT 1" />
+  
+    <Resource name="jdbc/shrineDB" auth="Container" type="javax.sql.DataSource"
+               maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+              username="<MYSQL_USER>" password="<MYSQL_PASSWORD>" driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://<SHRINE_DB_HOST>:<SHRINE_DB_PORT>/shrine_query_history"
+               testOnBorrow="true" validationQuery="SELECT 1" />
+  
+    <Resource name="jdbc/adapterAuditDB" auth="Container" type="javax.sql.DataSource"
+              maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+              username="<MYSQL_USER>" password="<MYSQL_PASSWORD>" driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://<SHRINE_DB_HOST>:<SHRINE_DB_PORT>/adapterAuditDB"
+              testOnBorrow="true" validationQuery="SELECT 1" />
+  
+    <Resource name="jdbc/qepAuditDB" auth="Container" type="javax.sql.DataSource"
+              maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+              username="<MYSQL_USER>" password="<MYSQL_PASSWORD>" driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://<SHRINE_DB_HOST>:<SHRINE_DB_PORT>/qepAuditDB"
+              testOnBorrow="true" validationQuery="SELECT 1" />
+  
+    <Resource name="jdbc/stewardDB" auth="Container" type="javax.sql.DataSource"
+              maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+              username="<MYSQL_USER>" password="<MYSQL_PASSWORD>" driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://<SHRINE_DB_HOST>:<SHRINE_DB_PORT>/stewardDB"
+              testOnBorrow="true" validationQuery="SELECT 1" />
+</Context>

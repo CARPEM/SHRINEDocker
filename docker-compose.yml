@@ -1,0 +1,76 @@
+# Use postgres/example user/password credentials
+version: "3.1"
+
+services:
+
+    i2b2app:
+       build: ./i2b2app
+       restart: always
+       ports:
+          - 8080:8080
+       environment:
+         SECRETS: /run/secrets/secrets
+       secrets:
+         - secrets
+
+    i2b2db:
+        build: ./posgres-i2b2
+        restart: always
+        # links:
+        #    - i2b2app
+        environment:
+          SECRETS: /run/secrets/secrets
+        secrets:
+          - secrets
+
+    shrinedb:
+        build: ./mariadb-shrine
+        restart: always
+        # links:
+        #    - shrine
+        environment:
+          SECRETS: /run/secrets/secrets
+        secrets:
+          - secrets
+
+    shrine:
+        build: ./shrine
+        restart: always
+        ports:
+           - 6443:6443
+        environment:
+          SECRETS: /run/secrets/secrets
+        secrets:
+          - secrets
+        volumes:
+           - ./shrine/cert:/opt/cert
+
+    webserver:
+        build: ./webserver
+        restart: always
+        ports:
+           - 80:80
+        # links:
+        #    - i2b2app
+        # volumes:
+        #    - ./webserver/webclient:/var/www/html/
+        environment:
+          SECRETS: /run/secrets/secrets
+        secrets:
+          - secrets
+    #
+    #
+    # pgadmin:
+    #     image: thajeztah/pgadmin4
+    #     restart: always
+    #     ports:
+    #        - 5050:5050
+    omnidb:
+      image: sorrell/alpine-omnidb
+      restart: always
+      ports:
+        - 5050:9000
+
+secrets:
+  secrets:
+    file: secrets.txt

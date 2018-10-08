@@ -1,0 +1,202 @@
+shrine {
+  pmEndpoint {
+    url = "http://<PM_HOST>:<PM_PORT>/i2b2/services/PMService/getServices"
+  }
+  ontEndpoint {
+    url = "http://<ONT_HOST>:<ONT_PORT>/i2b2/services/OntologyService"
+  }
+
+  hiveCredentials {
+    domain = <I2B2_DOMAIN>
+    username = <I2B2_USER>
+    password = <I2B2_PASSWORD>
+    crcProjectId = <I2B2_CRC_PROJECT_ID>
+    ontProjectId = <SHRINE_ONT_PROJECT_ID>
+  }
+
+  breakdownResultOutputTypes {
+    PATIENT_AGE_COUNT_XML {
+      description = "Age patient breakdown"
+    }
+    PATIENT_RACE_COUNT_XML {
+      description = "Race patient breakdown"
+    }
+    PATIENT_VITALSTATUS_COUNT_XML {
+      description = "Vital Status patient breakdown"
+    }
+    PATIENT_GENDER_COUNT_XML {
+      description = "Gender patient breakdown"
+    }
+  }
+
+  queryEntryPoint {
+    create = true
+    audit {
+      collectQepAudit = false
+      database {
+        dataSourceFrom = "JNDI"
+        jndiDataSourceName = "java:comp/env/jdbc/qepAuditDB"
+        slickProfileClassName = "slick.driver.MySQLDriver$"
+                                //slick.driver.H2Driver$
+                                //slick.driver.PostgresDriver$
+                                //slick.driver.SQLServerDriver$
+                                //slick.driver.JdbcDriver$
+                                //freeslick.OracleProfile$
+                                //freeslick.MSSQLServerProfile$
+      }
+    }
+
+    trustModelIsHub = true
+    attachSigningCert = true
+    authenticationType = "pm"
+    authorizationType = "shrine-steward"
+
+    shrineSteward {
+      qepUserName = <QEP_USER>
+      qepPassword = <QEP_PASSWORD>
+      stewardBaseUrl = "https://<SHRINE_WEBCLIENT_HOST>:<SHRINE_WEBCLIENT_PORT>"
+    }
+
+      includeAggregateResults = false
+
+      maxQueryWaitTime {
+        minutes = 5
+      }
+
+    broadcasterServiceEndpoint {
+        url = "https://<SHRINE_HUB_HOST>:<SHRINE_HUB_PORT>/shrine/rest/broadcaster/broadcast"
+    }
+  } //end queryEntryPoint
+
+  <HUB>
+
+  adapter {
+    create = true
+    audit {
+      collectAdapterAudit = false
+      database {
+        dataSourceFrom = "JNDI"
+        jndiDataSourceName = "java:comp/env/jdbc/adapterAuditDB"
+        slickProfileClassName = "slick.driver.MySQLDriver$"
+                                //slick.driver.H2Driver$
+                                //slick.driver.PostgresDriver$
+                                //slick.driver.SQLServerDriver$
+                                //slick.driver.JdbcDriver$
+                                //freeslick.OracleProfile$
+                                //freeslick.MSSQLServerProfile$
+      }
+    }
+
+    crcEndpoint {
+      url = "http://<CRC_HOST>:<CRC_PORT>/i2b2/services/QueryToolService"
+    }
+
+    adapterLockoutAttemptsThreshold = 0
+    setSizeObfuscation = true
+    adapterMappingsFileName = "AdapterMappings.csv"
+
+    maxSignatureAge {
+      minutes = 5
+    }
+
+    immediatelyRunIncomingQueries = true
+
+  } // end adapter
+
+    networkStatusQuery = "\\\\SHRINE\\SHRINE\\Demographics\\Gender\\Male\\"
+    humanReadableNodeName = <NODE_NAME>
+    shrineDatabaseType = "mysql"
+
+    keystore {
+      file = "/opt/shrine/<KEYSTORE_FILE>"
+      password = <KEYSTORE_PASSWORD>
+      privateKeyAlias = <KEYSTORE_ALIAS>
+      keyStoreType = "JKS"
+      caCertAliases = ["shrine-hub-ca"]
+    }
+
+    problem {
+      problemHandler = "net.shrine.problem.LogAndDatabaseProblemHandler$"
+    }
+
+  dashboard {
+    happyBaseUrl = "https://localhost:<SHRINE_PORT>/shrine/rest/happy"
+    statusBaseUrl = "https://localhost:<SHRINE_PORT>/shrine/rest/internalstatus"
+
+    database {
+      dataSourceFrom = "JNDI"
+      jndiDataSourceName = "java:comp/env/jdbc/problemDB"
+      slickProfileClassName = "slick.driver.MySQLDriver$"
+                                //slick.driver.H2Driver$
+                                //slick.driver.PostgresDriver$
+                                //slick.driver.SQLServerDriver$
+                                //slick.driver.JdbcDriver$
+                                //freeslick.OracleProfile$
+                                //freeslick.MSSQLServerProfile$
+    }
+    } //end dashboard
+
+    status {
+      permittedHostOfOrigin = "localhost"
+    }
+
+    squerylDataSource {
+      database {
+        dataSourceFrom = "JNDI"
+        jndiDataSourceName = "java:comp/env/jdbc/shrineDB"
+      }
+    }
+
+    authenticate {
+      usersource {
+        domain = <I2B2_DOMAIN>
+      }
+    }
+
+  steward {
+    createTopicsMode = Approved
+
+    emailDataSteward {
+      sendAuditEmails = false  //false to turn off the whole works of emailing the data steward
+      //interval = "1 day" //Audit researchers daily
+      //timeAfterMidnight = "6 hours" //Audit researchers at 6 am. If the interval is less than 1 day then this delay is ignored.
+      //maxQueryCountBetweenAudits = 30 //If a researcher runs more than this many queries since the last audit audit her
+      //minTimeBetweenAudits = "30 days" //If a researcher runs at least one query, audit those queries if this much time has passed
+
+      //You must provide the email address of the shrine node system admin, to handle bounces and invalid addresses
+      //from = "shrine-admin@example.com"
+      //You must provide the email address of the data steward
+      //to = "shrine-steward@example.com"
+
+      //subject = "Audit SHRINE researchers"
+      //The baseUrl for the data steward to be substituted in to email text. Must be supplied if it is used in the email text.
+      //stewardBaseUrl = "https://example.com:8443/steward/"
+
+      //Text to use for the email audit.
+      //AUDIT_LINES will be replaced by a researcherLine for each researcher to audit.
+      //STEWARD_BASE_URL will be replaced by the value in stewardBaseUrl if available.
+      //emailBody = """Please audit the following users at STEWARD_BASE_URL at your earliest convinience: AUDIT_LINES"""
+      //note that this can be a multiline message
+
+      //Text to use per researcher to audit.
+      //FULLNAME, USERNAME, COUNT and LAST_AUDIT_DATE will be replaced with appropriate text.
+      //researcherLine = "FULLNAME (USERNAME) has run COUNT queries since LAST_AUDIT_DATE."
+    }
+
+    database {
+      dataSourceFrom = "JNDI"
+      jndiDataSourceName = "java:comp/env/jdbc/stewardDB"
+      slickProfileClassName = "slick.driver.MySQLDriver$"
+                                //slick.driver.H2Driver$
+                                //slick.driver.PostgresDriver$
+                                //slick.driver.SQLServerDriver$
+                                //slick.driver.JdbcDriver$
+                                //freeslick.OracleProfile$
+                                //freeslick.MSSQLServerProfile$
+    }
+  } // end steward
+
+  email {
+  }
+
+} // end shrine section

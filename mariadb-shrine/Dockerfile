@@ -1,0 +1,10 @@
+FROM mariadb:latest
+
+# ENV MYSQL_USER=$MYSQL_USER
+# ENV MYSQL_PASSWORD=$MYSQL_PASSWORD
+# ENV MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+
+ADD ./start.sh .
+RUN chmod +x start.sh
+
+ENTRYPOINT ["./start.sh"]
