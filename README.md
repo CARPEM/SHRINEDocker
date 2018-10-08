@@ -81,7 +81,7 @@ The hub administrator will send you back:
 
 Execute the following command
 ```bash
-sudo docker exec -it dockeri2b2_shrine_1 /bin/bash
+sudo docker-compose exec shrine /bin/bash
 ```
 ```bash
 ./import-cert.sh
