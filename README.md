@@ -20,7 +20,7 @@ From dockeri2b2 root directory
 cp secrets.template secrets.txt
 ```
 
-## Adapt parameters within the set_env.sh
+## Adapt parameters within the secret.txt file
 Edit secrets.txt and modify parameters :
 
 * **SHRINE_HUB_HOST and SHRINE_HUB_PORT** should be adressed to you by the HUB administrator
