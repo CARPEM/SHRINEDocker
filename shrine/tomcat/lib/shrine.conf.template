@@ -8,8 +8,8 @@ shrine {
 
   hiveCredentials {
     domain = <I2B2_DOMAIN>
-    username = <I2B2_USER>
-    password = <I2B2_PASSWORD>
+    username = <SHRINE_CRC_USER>
+    password = <SHRINE_CRC_PASSWORD>
     crcProjectId = <I2B2_CRC_PROJECT_ID>
     ontProjectId = <SHRINE_ONT_PROJECT_ID>
   }

@@ -26,8 +26,8 @@ sed -i "s#<CRC_PORT>#$CRC_PORT#g" lib/shrine.conf
 
 #Hive credentials
 sed -i "s#<I2B2_DOMAIN>#$I2B2_DOMAIN#g" lib/shrine.conf
-sed -i "s#<I2B2_USER>#$I2B2_USER#g" lib/shrine.conf
-sed -i "s#<I2B2_PASSWORD>#$I2B2_PASSWORD#g" lib/shrine.conf
+sed -i "s#<SHRINE_CRC_USER>#$SHRINE_CRC_USER#g" lib/shrine.conf
+sed -i "s#<SHRINE_CRC_PASSWORD>#$SHRINE_CRC_PASSWORD#g" lib/shrine.conf
 sed -i "s#<I2B2_CRC_PROJECT_ID>#$I2B2_CRC_PROJECT_ID#g" lib/shrine.conf
 sed -i "s#<SHRINE_ONT_PROJECT_ID>#$SHRINE_ONT_PROJECT_ID#g" lib/shrine.conf
 

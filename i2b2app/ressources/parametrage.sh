@@ -32,10 +32,10 @@ echo 'repertoire i2b2 ==> ' $i2b2_source
 
 ###########################################################
 #
-# This part of the code is mostly from Florian Endel 
-# (https://github.com/FlorianEndel/i2b2-Docker/blob/master/4.1%20i2b2%20Server%20Common/Dockerfile) 
+# This part of the code is mostly from Florian Endel
+# (https://github.com/FlorianEndel/i2b2-Docker/blob/master/4.1%20i2b2%20Server%20Common/Dockerfile)
 #
-# Sets up i2b2 app with parameters  
+# Sets up i2b2 app with parameters
 
 ###########################
 #Server-commons
@@ -118,8 +118,8 @@ xmlstarlet ed -N $XML_SCHEMA  -u "(//ds:user-name)[1]" -v $i2b2_db_user_ONT | \
 xmlstarlet ed -N $XML_SCHEMA  -u "(//ds:password)[1]" -v $i2b2_db_pass_ONT | \
 xmlstarlet ed -N $XML_SCHEMA  -u "(//ds:user-name)[2]" -v  $i2b2_db_user_HIVE | \
 xmlstarlet ed -N $XML_SCHEMA -u "(//ds:password)[2]" -v $i2b2_db_pass_HIVE | \
-xmlstarlet ed -N $XML_SCHEMA  -u "(//ds:user-name)[3]" -v  $SHRINE_ONT_USER  | \
-xmlstarlet ed -N $XML_SCHEMA -u "(//ds:password)[3]" -v $SHRINE_ONT_PASSWORD  \
+xmlstarlet ed -N $XML_SCHEMA  -u "(//ds:user-name)[3]" -v  $SHRINE_ONT_DB_USER  | \
+xmlstarlet ed -N $XML_SCHEMA -u "(//ds:password)[3]" -v $SHRINE_ONT_DB_PASSWORD  \
 > ont-ds.xml
 #sed -i "s/SHRINE_ONT_USER/$SHRINE_ONT_USER/g" ont-ds.xml
 #sed -i "s/SHRINE_ONT_PASSWORD/$SHRINE_ONT_PASSWORD/g" ont-ds.xml
@@ -299,9 +299,9 @@ $ANT_HOME/bin/ant -f master_build.xml clean build-all deploy
 #################################
 #
 # End of FLorian Endel's code
-# (https://github.com/FlorianEndel/i2b2-Docker/blob/master/4.1%20i2b2%20Server%20Common/Dockerfile) 
+# (https://github.com/FlorianEndel/i2b2-Docker/blob/master/4.1%20i2b2%20Server%20Common/Dockerfile)
 #
-# 
+#
 
 ###################
 #Install axis 2

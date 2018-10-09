@@ -27,6 +27,14 @@ services:
        secrets:
          - secrets
 
+    usermanagement:
+       build: ./usermanagement
+       restart: "no"
+       environment:
+         SECRETS: /run/secrets/secrets
+       secrets:
+         - secrets
+
 secrets:
   secrets:
     file: secrets.txt
