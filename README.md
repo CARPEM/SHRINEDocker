@@ -32,6 +32,8 @@ For testing purpose it is possible to leave other parameters. However it is higl
 ## Build and start the APP
 From the root directory of the project
 ```bash
+sudo docker-compose build
+sudo docker-compose -f docker-compose-dataloader.yml build
 sudo docker-compose up
 ```
 
