@@ -1,0 +1,3 @@
+shrine/cert/*.*
+set_env.sh
+secrets.txt
