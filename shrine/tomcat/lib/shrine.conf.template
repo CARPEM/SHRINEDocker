@@ -7,11 +7,11 @@ shrine {
   }
 
   hiveCredentials {
-    domain = <I2B2_DOMAIN>
-    username = <SHRINE_CRC_USER>
-    password = <SHRINE_CRC_PASSWORD>
-    crcProjectId = <I2B2_CRC_PROJECT_ID>
-    ontProjectId = <SHRINE_ONT_PROJECT_ID>
+    domain = "<I2B2_DOMAIN>"
+    username = "<SHRINE_CRC_USER>"
+    password = "<SHRINE_CRC_PASSWORD>"
+    crcProjectId = "<I2B2_CRC_PROJECT_ID>"
+    ontProjectId = "<SHRINE_ONT_PROJECT_ID>"
   }
 
   breakdownResultOutputTypes {
@@ -52,8 +52,8 @@ shrine {
     authorizationType = "shrine-steward"
 
     shrineSteward {
-      qepUserName = <QEP_USER>
-      qepPassword = <QEP_PASSWORD>
+      qepUserName = "<QEP_USER>"
+      qepPassword = "<QEP_PASSWORD>"
       stewardBaseUrl = "https://<SHRINE_WEBCLIENT_HOST>:<SHRINE_WEBCLIENT_PORT>"
     }
 
@@ -104,13 +104,13 @@ shrine {
   } // end adapter
 
     networkStatusQuery = "\\\\SHRINE\\SHRINE\\Demographics\\Gender\\Male\\"
-    humanReadableNodeName = <NODE_NAME>
+    humanReadableNodeName = "<NODE_NAME>"
     shrineDatabaseType = "mysql"
 
     keystore {
       file = "/opt/shrine/<KEYSTORE_FILE>"
-      password = <KEYSTORE_PASSWORD>
-      privateKeyAlias = <KEYSTORE_ALIAS>
+      password = "<KEYSTORE_PASSWORD>"
+      privateKeyAlias = "<KEYSTORE_ALIAS>"
       keyStoreType = "JKS"
       caCertAliases = ["shrine-hub-ca"]
     }
@@ -149,7 +149,7 @@ shrine {
 
     authenticate {
       usersource {
-        domain = <I2B2_DOMAIN>
+        domain = "<I2B2_DOMAIN>"
       }
     }
 
