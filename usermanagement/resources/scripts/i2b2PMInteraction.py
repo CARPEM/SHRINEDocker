@@ -66,11 +66,13 @@ class i2b2_pm_interaction:
         print(self.pm_url)
 
     def post_to_pm(self,data) :
+        print('post to pm')
         r=requests.post(self.pm_url,data)
         print(r.status_code, r.reason)
-        print(r.text[:])
+        # print(r.text[:])
 
     def adduser (self,user_name,password,user_full_name,is_admin,user_email):
+        print('adduser ==> ' + user_name)
         xmlSetUser=self.xmlPmHeader+"""
             <message_body>
                 <pm:set_user>
@@ -87,6 +89,7 @@ class i2b2_pm_interaction:
         self.post_to_pm(xmlSetUser)
 
     def addrole(self,user_name,role,project_id):
+        print('addrole ==>' + user_name)
         xmlSetRole=self.xmlPmHeader+"""
             <message_body>
                 <pm:set_role>
@@ -100,9 +103,11 @@ class i2b2_pm_interaction:
         self.post_to_pm(xmlSetRole)
 
     def setadmin(self,user_name) :
+        print('setadmin ==> ' + user_name)
         self.addrole(user_name,"ADMIN","@")
 
     def deleteuser(self,user_name):
+        print('deleteuser ==> ' + user_name)
         xmlDeleteUser=self.xmlPmHeader+"""
             <message_body>
                 <pm:delete_user>"""+user_name+"""</pm:delete_user>
@@ -113,6 +118,7 @@ class i2b2_pm_interaction:
         self.post_to_pm(xmlDeleteUser)
 
     def deleteuserrole(self,user_name,role,project_id):
+        print('deleteUserRole ==> ' + user_name)
         xmlDeleteUserRole=self.xmlPmHeader+"""
             <message_body>
                 <pm:delete_role>
@@ -127,6 +133,7 @@ class i2b2_pm_interaction:
         self.post_to_pm(xmlDeleteUserRole)
 
     def setuserparam(self,user_name,param_name,param_type,param_value):
+        print('setuserparam ==> ' + user_name + ' - ' + param_name)
         xmlSetUserParam=self.xmlPmHeader+"""
         <message_body>
             <pm:set_user_param>
@@ -140,6 +147,7 @@ class i2b2_pm_interaction:
         self.post_to_pm(xmlSetUserParam)
 
     def setpassword(self,password):
+        print('setpassword ==> ' + self.pm_user)
         xmlSetPassword=self.xmlPmHeader+"""
             <message_body>
                 <pm:set_password>"""+password+"""</pm:set_password>
