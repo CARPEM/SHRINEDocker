@@ -132,6 +132,8 @@ ADD ./ressources/import-cert.sh /opt/shrine/import-cert.sh
 RUN chmod +x /opt/shrine/import-cert.sh
 ADD ./ressources/sign-cert.sh /opt/shrine/sign-cert.sh
 RUN chmod +x /opt/shrine/sign-cert.sh
+ADD ./ressources/initHubCa.sh /opt/shrine/initHubCa.sh
+RUN chmod +x /opt/shrine/initHubCa.sh
 RUN touch deployed
 RUN echo 'false'>deployed
 
