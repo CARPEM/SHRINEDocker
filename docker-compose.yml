@@ -14,7 +14,7 @@ services:
          - secrets
 
     i2b2db:
-        build: ./posgres-i2b2
+        build: ./i2b2db
         restart: always
         # links:
         #    - i2b2app
@@ -24,7 +24,7 @@ services:
           - secrets
 
     shrinedb:
-        build: ./mariadb-shrine
+        build: ./shrinedb
         restart: always
         # links:
         #    - shrine
