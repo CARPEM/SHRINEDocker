@@ -154,9 +154,9 @@
       <path fill="none" d="M597.8407 547.2112 L602.0471 399.2344" clip-path="url(#clipPath2)"/>
       <path d="M602.2745 391.2376 L596.9355 403.0907 L602.0187 400.234 L606.9314 403.3749 Z" clip-path="url(#clipPath2)" stroke="none"/>
       <text x="574.3672" font-size="20px" y="473.5488" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve">PORT:3306</text>
-      <path fill="none" d="M342.0439 547.5441 L540.6158 396.0884" clip-path="url(#clipPath2)"/>
-      <path d="M546.9767 391.2367 L534.4031 394.5386 L539.8207 396.6948 L540.4676 402.4898 Z" clip-path="url(#clipPath2)" stroke="none"/>
-      <text x="435.3846" font-size="20px" y="473.614" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve">PORT : 5432</text>
+      <path fill="none" d="M356.7632 348.125 L523.003 348.125" clip-path="url(#clipPath2)"/>
+      <path d="M531.003 348.125 L519.003 343.125 L522.003 348.125 L519.003 353.125 Z" clip-path="url(#clipPath2)" stroke="none"/>
+      <text x="381.7412" font-size="20px" y="385.0488" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve">PORT : 8080</text>
       <path fill="none" d="M675.9788 334.4117 L1460.7177 334.4117" clip-path="url(#clipPath2)"/>
       <path d="M1468.7177 334.4117 L1456.7177 329.4117 L1459.7177 334.4117 L1456.7177 339.4117 Z" clip-path="url(#clipPath2)" stroke="none"/>
       <text x="936.4219" font-size="20px" y="366.2134" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve">HTTPS</text>
