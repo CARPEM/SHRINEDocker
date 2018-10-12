@@ -1,9 +1,9 @@
 # Purpose and context
-This project aims to automate the deployment of an i2b2 - shrine application. 
+This project aims to automate the deployment of an i2b2 - shrine application.
 
 Please visit [i2b2](https://www.i2b2.org/) and [SHRINE](https://open.med.harvard.edu/wiki/display/SHRINE) websites for more information.
 
-The installation process is mainly based on the [i2b2 installation guide](https://community.i2b2.org/wiki/display/getstarted/i2b2+Installation+Guide) and [shrine installation guide](https://open.med.harvard.edu/wiki/display/SHRINE/Installation)  and follows all the steps described within these documents. 
+The installation process is mainly based on the [i2b2 installation guide](https://community.i2b2.org/wiki/display/getstarted/i2b2+Installation+Guide) and [shrine installation guide](https://open.med.harvard.edu/wiki/display/SHRINE/Installation)  and follows all the steps described within these documents.
 
 You can see the [architecture](https://github.com/CARPEM/SHRINEDocker/wiki/Architecture) of the final default built application (ports and hotname generated locally on the HOST machine) when set up within a private network and connecting to an external hub.
 
@@ -55,7 +55,7 @@ Open another bash
 ```
 
 ### Load demo data (shrine)
-Afer i2b2 demo data are loaded
+After i2b2 demo data are loaded
 ```bash
 ./setShrineData.sh
 ```
