@@ -61,7 +61,7 @@ class i2b2_pm_interaction:
         # port_str=""
         # if webclient_port!='80' :
         #     port_str = ":"+webclient_port
-
+        self.pm_user=pm_user
         self.pm_url="http://"+webclient_host+":"+webclient_port+"/webclient/index.php"
         print(self.pm_url)
 
