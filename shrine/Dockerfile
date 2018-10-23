@@ -22,9 +22,9 @@ RUN 	update-alternatives --install /usr/bin/java java /opt/java/jdk1.8.0_192/bin
 	&& 	rm /opt/java/jdk-8u192*.tar.gz
 
 #-- setting JAVA variables
-RUN 	export JAVA_HOME=/opt/java/jdk1.8.0_192 \
-	&& 	export JRE_HOME=/opt/java/jdk1.8.0_192/jre \
-	&&	export PATH=$PATH:/opt/java/jdk1.8.0_192/bin:/opt/java/jdk1.8.0_192/jre/bin
+RUN 	export JAVA_HOME=/opt/java/jdk1.8.0_172 \
+	&& 	export JRE_HOME=/opt/java/jdk1.8.0_172/jre \
+	&&	export PATH=$PATH:/opt/java/jdk1.8.0_172/bin:/opt/java/jdk1.8.0_172/jre/bin
 
 # ENV KEYSTORE_ALIAS=$KEYSTORE_ALIAS
 # ENV KEYSTORE_HUMAN=$KEYSTORE_HUMAN
@@ -124,7 +124,7 @@ RUN echo $KEYSTORE_ALIAS
 
 WORKDIR /opt/shrine
 
-RUN ln -s /opt/java/jdk1.8.0_181/bin/keytool /usr/local/bin/keytool
+RUN ln -s /opt/java/jdk1.8.0_192/bin/keytool /usr/local/bin/keytool
 
 ADD ./ressources/start.sh /opt/shrine/start.sh
 RUN chmod +x /opt/shrine/start.sh
