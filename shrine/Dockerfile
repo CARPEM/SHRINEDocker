@@ -7,8 +7,8 @@ WORKDIR /opt/java
 RUN apt-get update  \
 	&& apt-get install wget -y
 
-RUN wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=a" "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz" \
-	&& tar xzf jdk-8u181-linux-x64.tar.gz
+RUN wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=a" "http://download.oracle.com/otn-pub/java/jdk/8u192-b12/750e1c8617c5452694857ad95c3ee230/jdk-8u192-linux-x64.tar.gz" \
+	&& tar xzf jdk-8u1192-linux-x64.tar.gz
 
 RUN chown -R root: jdk1.8.0_*
 
