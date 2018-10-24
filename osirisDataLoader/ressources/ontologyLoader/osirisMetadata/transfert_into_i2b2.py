@@ -103,10 +103,10 @@ def transfert (path_metafile, path_conceptfile, path_modiffile, path_shrine):
 
 def main():
 
-	path_metafile = '/opt/see2i2b2_meta.txt'
-	path_conceptfile = '/opt/see2i2b2_demo.txt'
-	path_modiffile = '/opt/see2i2b2_modif.txt'
-	path_shrine = '/opt/see2shrine_.txt'
+	path_metafile = '/opt/ontologyLoader/osirisMetadata/see2i2b2_meta.txt'
+	path_conceptfile = '/opt/ontologyLoader/osirisMetadata/see2i2b2_demo.txt'
+	path_modiffile = '/opt/ontologyLoader/osirisMetadata/see2i2b2_modif.txt'
+	path_shrine = '/opt/ontologyLoader/osirisMetadata/see2shrine_.txt'
 
 	transfert (path_metafile, path_conceptfile, path_modiffile, path_shrine)
 

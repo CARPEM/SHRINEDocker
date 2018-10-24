@@ -1,5 +1,5 @@
 sudo docker-compose -f docker-compose-dataloader.yml build osirisdataloader
-sudo docker-compose -f docker-compose-dataloader.yml run osirisdataloader /opt/ontologyLoader/loadOntology.sh
+sudo docker-compose -f docker-compose-dataloader.yml run osirisdataloader /opt/dataLoader/loadOsirisData.sh
 sudo docker-compose -f docker-compose-dataloader.yml rm --force osirisdataloader
 
 

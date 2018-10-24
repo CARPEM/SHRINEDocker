@@ -19,13 +19,15 @@ services:
        secrets:
          - secrets
 
-    osirisontologyloader:
-       build: ./osirisOntologyLoader
+    osirisdataloader:
+       build: ./osirisDataLoader
        restart: "no"
        environment:
          SECRETS: /run/secrets/secrets
        secrets:
          - secrets
+       volumes:
+         - ./osirisDataLoader/data_to_load/:/opt/data_to_load/
 
     usermanagement:
        build: ./usermanagement

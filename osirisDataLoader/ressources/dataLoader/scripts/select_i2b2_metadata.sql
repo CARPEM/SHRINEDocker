@@ -1,0 +1,1 @@
+select c_name, c_tablename, c_columndatatype from i2b2metadata.i2b2 where sourcesystem_cd = 'TEST_OSIRIS' and c_tablename in ('visit_dimension', 'patient_dimension', 'VISIT_DIMENSION', 'PATIENT_DIMENSION');

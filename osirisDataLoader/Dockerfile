@@ -30,14 +30,16 @@ FROM python:latest
 # ENV SHRINE_ONT_USER=$SHRINE_ONT_USER
 # ENV SHRINE_ONT_PASSWORD=$SHRINE_ONT_PASSWORD
 
-RUN pip install psycopg2 cx_oracle
+RUN pip install psycopg2 cx_oracle mysql
 
 
 WORKDIR /opt
-ADD ./ressources/osirisMetadata /opt/
+ADD ./ressources/ /opt/
 
-ADD ./ressources/installdata.sh /opt/installdata.sh
 
-RUN chmod +x /opt/installdata.sh
+# ADD ./ressources/ontologyLoader/loadOntology.sh /opt/loadOntology.sh
 
-ENTRYPOINT ["/opt/installdata.sh"]
+RUN chmod +x /opt/ontologyLoader/loadOntology.sh
+RUN chmod +x /opt/dataLoader/loadOsirisData.sh
+
+ENTRYPOINT ["/bin/bash"]
