@@ -36,8 +36,8 @@ sed -i "s#<SHRINE_ONT_PROJECT_ID>#$SHRINE_ONT_PROJECT_ID#g" lib/shrine.conf
 #steward
 sed -i "s#<QEP_USER>#$QEP_USER#g" lib/shrine.conf
 sed -i "s#<QEP_PASSWORD>#$QEP_PASSWORD#g" lib/shrine.conf
-sed -i "s#<SHRINE_WEBCLIENT_HOST>#$SHRINE_HOST#g" lib/shrine.conf
-sed -i "s#<SHRINE_WEBCLIENT_PORT>#$SHRINE_PORT#g" lib/shrine.conf
+sed -i "s#<SHRINE_WEBCLIENT_HOST>#$SHRINE_WEBCLIENT_HOST#g" lib/shrine.conf
+sed -i "s#<SHRINE_WEBCLIENT_PORT>#$SHRINE_WEBCLIENT_PORT#g" lib/shrine.conf
 sed -i "s#<SHRINE_HOST>#$SHRINE_HOST#g" lib/shrine.conf
 sed -i "s#<SHRINE_PORT>#$SHRINE_PORT#g" lib/shrine.conf
 
