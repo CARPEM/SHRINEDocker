@@ -54,7 +54,7 @@ shrine {
     shrineSteward {
       qepUserName = "<QEP_USER>"
       qepPassword = "<QEP_PASSWORD>"
-      stewardBaseUrl = "https://<SHRINE_WEBCLIENT_HOST>:<SHRINE_WEBCLIENT_PORT>"
+      stewardBaseUrl = "https://shrine:<SHRINE_PORT>"
     }
 
       includeAggregateResults = false

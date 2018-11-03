@@ -100,13 +100,23 @@
          configuration is used below.
     -->
 	<Connector port="<SHRINE_PORT>" protocol="org.apache.coyote.http11.Http11NioProtocol"
+               address="<SHRINE_HOST>"
                maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
                clientAuth="false" sslProtocol="TLS"
                keystoreFile="/opt/shrine/<KEYSTORE_FILE>"
                keystorePass="<KEYSTORE_PASSWORD>"
                keyAlias="<KEYSTORE_ALIAS>" />
-    
-    
+
+             -->
+  <Connector port="<SHRINE_PORT>" protocol="org.apache.coyote.http11.Http11NioProtocol"
+                address="shrine"
+                maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
+                clientAuth="false" sslProtocol="TLS"
+                keystoreFile="/opt/shrine/<KEYSTORE_FILE>"
+                keystorePass="<KEYSTORE_PASSWORD>"
+                keyAlias="shrine" />
+
+
     <!-- Define an AJP 1.3 Connector on port 8009 -->
     <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />
 

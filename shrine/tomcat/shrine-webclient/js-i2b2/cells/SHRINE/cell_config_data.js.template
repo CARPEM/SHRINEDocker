@@ -12,6 +12,6 @@
     description: "The SHRINE cell...",
     category: ["core","cell","shrine"],
     newTopicURL: "https://<SHRINE_WEBCLIENT_HOST>:<SHRINE_WEBCLIENT_PORT>/steward/client/index.html",
-    readApprovedURL:"https://<SHRINE_WEBCLIENT_HOST>:<SHRINE_WEBCLIENT_PORT>/shrine/rest/i2b2/request"
+    readApprovedURL:"https://shrine:<SHRINE_WEBCLIENT_PORT>/shrine/rest/i2b2/request"
   }
 }
