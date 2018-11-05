@@ -46,7 +46,7 @@ if [ "$IS_HUB" = "true" ]; then
 	sed -i "s#<SHRINE_HUB_HOST>#shrine#g" lib/shrine.conf
 	echo 'is HUB ==> TRUE'
 else
-sed -i "s#<SHRINE_HUB_HOST>#$SHRINE_HUB_HOST#g" lib/shrine.conf
+	sed -i "s#<SHRINE_HUB_HOST>#$SHRINE_HUB_HOST#g" lib/shrine.conf
 	echo 'is HUB ==> FALSE'
 fi
 sed -i "s#<SHRINE_HUB_PORT>#$SHRINE_HUB_PORT#g" lib/shrine.conf
