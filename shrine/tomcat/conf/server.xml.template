@@ -100,7 +100,6 @@
          configuration is used below.
     -->
 	<Connector port="<SHRINE_PORT>" protocol="org.apache.coyote.http11.Http11NioProtocol"
-               address="<SHRINE_HOST>"
                maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
                clientAuth="false" sslProtocol="TLS"
                keystoreFile="/opt/shrine/<KEYSTORE_FILE>"
