@@ -108,7 +108,7 @@ keytool -genkeypair -keysize 2048 -alias $KEYSTORE_ALIAS -dname "CN=$KEYSTORE_AL
 keytool -certreq -alias $KEYSTORE_ALIAS -keyalg RSA -file $KEYSTORE_ALIAS.csr -keypass $KEYSTORE_PASSWORD -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE_FILE
 keytool -export -alias $KEYSTORE_ALIAS -storepass $KEYSTORE_PASSWORD -file ${KEYSTORE_ALIAS}_HTTPS.cer -keystore $KEYSTORE_FILE
 keytool -import -v -trustcacerts -alias shrine-hub-ca -file ${KEYSTORE_ALIAS}_HTTPS.cer -keystore $KEYSTORE_FILE -storepass $KEYSTORE_PASSWORD -noprompt
-keytool -genkeypair -keysize 2048 -alias shrine -dname "CN=shrine, OU=shrine local, O=SHRINE Network, L=$KEYSTORE_CITY, S=$KEYSTORE_STATE, C=$KEYSTORE_COUNTRY" -keyalg RSA -keypass $KEYSTORE_PASSWORD -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE_FILE -storetype pkcs12 -validity 7300
+#keytool -genkeypair -keysize 2048 -alias shrine -dname "CN=shrine, OU=shrine local, O=SHRINE Network, L=$KEYSTORE_CITY, S=$KEYSTORE_STATE, C=$KEYSTORE_COUNTRY" -keyalg RSA -keypass $KEYSTORE_PASSWORD -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE_FILE -storetype pkcs12 -validity 7300
 keytool -list -v -keystore  $KEYSTORE_FILE -storepass $KEYSTORE_PASSWORD
 
 cp ${KEYSTORE_ALIAS}_HTTPS.cer /opt/cert
