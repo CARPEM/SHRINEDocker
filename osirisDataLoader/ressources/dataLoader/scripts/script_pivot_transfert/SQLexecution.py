@@ -76,7 +76,8 @@ class i2b2_interaction:
         cursor = self.connect_i2b2()
         #print(request_i2b2)
         #print(values)
-        cursor.execute(request_i2b2.encode('utf-8'), values)
+        if not None in values :
+            cursor.execute(request_i2b2.encode('utf-8'), values)
         cursor.close()
 
     def executeBasicRequestWithDate(self, request_i2b2):

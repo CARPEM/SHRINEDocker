@@ -5,7 +5,7 @@ services:
 
     i2b2app:
        build: ./i2b2app
-       restart: always
+       restart: on-failure
        ports:
           - 8080:8080
        environment:
@@ -15,7 +15,7 @@ services:
 
     i2b2db:
         build: ./i2b2db
-        restart: always
+        restart: on-failure
         # links:
         #    - i2b2app
         environment:
@@ -25,7 +25,7 @@ services:
 
     shrinedb:
         build: ./shrinedb
-        restart: always
+        restart: on-failure
         # links:
         #    - shrine
         environment:
@@ -35,7 +35,7 @@ services:
 
     shrine:
         build: ./shrine
-        restart: always
+        restart: on-failure
         ports:
            - 6443:6443
         environment:
@@ -44,10 +44,11 @@ services:
           - secrets
         volumes:
            - ./shrine/cert:/opt/cert
+           - ./shrine/tomcat/lib/adapterMapping:/opt/shrine/tomcat/lib/AdapterMapping
 
     webserver:
         build: ./webserver
-        restart: always
+        restart: on-failure
         ports:
            - 80:80
         # links:
@@ -62,12 +63,12 @@ services:
     #
     # pgadmin:
     #     image: thajeztah/pgadmin4
-    #     restart: always
+    #     restart: on-failure
     #     ports:
     #        - 5050:5050
     omnidb:
       image: sorrell/alpine-omnidb
-      restart: always
+      restart: on-failure
       ports:
         - 5050:9000
 

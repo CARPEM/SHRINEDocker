@@ -53,6 +53,9 @@ FROM library/ubuntu
 RUN apt-get update
 RUN apt-get install openjdk-8-jdk wget -y
 
+ADD ./ressources/wget_proxy_setup.sh /opt/wget_proxy_setup.sh
+RUN chmod +x /opt/wget_proxy_setup.sh
+
 RUN apt-get install unzip
 
 RUN apt-get install postgresql -y

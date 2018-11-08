@@ -31,7 +31,8 @@ FROM python:latest
 # ENV SHRINE_ONT_PASSWORD=$SHRINE_ONT_PASSWORD
 
 RUN pip install psycopg2 cx_oracle mysql
-
+RUN apt-get update \
+    && apt-get install postgresql -y
 
 WORKDIR /opt
 ADD ./ressources/ /opt/
@@ -41,5 +42,6 @@ ADD ./ressources/ /opt/
 
 RUN chmod +x /opt/ontologyLoader/loadOntology.sh
 RUN chmod +x /opt/dataLoader/loadOsirisData.sh
+RUN chmod +x /opt/dataLoader/adaptTables.sh
 
 ENTRYPOINT ["/bin/bash"]
