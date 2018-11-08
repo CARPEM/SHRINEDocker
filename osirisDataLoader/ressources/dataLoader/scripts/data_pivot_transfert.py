@@ -100,29 +100,8 @@ def load_i2b2_metadata(dic_db_param):
         dic_i2b2_metadata['type_var_i2b2'].append(metadata[2])
     return dic_i2b2_metadata
 
-def retrieve_max_patientNum(dic_db_param):
-    dic_i2b2_metadata = {};
-    dic_i2b2_metadata['var_i2b2'] = [];
-    dic_i2b2_metadata['table_i2b2'] = [];
-    dic_i2b2_metadata['type_var_i2b2'] = [];
-    dic_i2b2_metadata['var_pivot'] = []
 
-    # create a connexion between i2b2 database
-    interac_i2b2 = i2b2_interaction(dic_db_param['DB_type'], dic_db_param['DB_host'], dic_db_param['DB_name'],
-                                    dic_db_param['DB_port'], dic_db_param['BD_user'], dic_db_param['DB_password'])
-
-    # execute select metadata request
-    sql_select_max_patient_num = open(dic_db_param['path_to_scripts'] + 'select_max_patient_num.sql', 'r')
-    tab_patient_num = interac_i2b2.executeBasicRequest_n(sql_select_max_patient_num.read(), 1)
-
-    # transfert result to tab_metadata
-
-    print(len(tab_patient_num))
     for patient_num_ in tab_patient_num:
-        patient_num=patient_num_[0]
-    if patient_num=='None':
-        patient_num='0'
-    return int(float(patient_num))
 
 
 def lect_i2b2_metadata(metadata_file):
