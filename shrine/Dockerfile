@@ -2,10 +2,18 @@ FROM debian:latest
 
 USER root
 
+ENV HTTPS_PROXY=false
+ENV HTTP_PROXY=false
+
 RUN mkdir -p /opt/java
 WORKDIR /opt/java
 RUN apt-get update  \
 	&& apt-get install wget -y
+
+ADD ./ressources/wget_proxy_setup.sh /opt/wget_proxy_setup.sh
+RUN chmod +x /opt/wget_proxy_setup.sh
+
+RUN /opt/wget_proxy_setup.sh
 
 RUN wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=a" "http://download.oracle.com/otn-pub/java/jdk/8u192-b12/750e1c8617c5452694857ad95c3ee230/jdk-8u192-linux-x64.tar.gz" \
 	&& tar xzf jdk-8u192-linux-x64.tar.gz
@@ -118,7 +126,7 @@ RUN chmod +x /opt/shrine/tomcat/build_shrine.sh
 WORKDIR /opt/shrine/tomcat
 # RUN ./build_shrine.sh
 
-ADD ./tomcat/lib/AdapterMappings.csv /opt/shrine/tomcat/lib/AdapterMappings.csv
+# ADD ./tomcat/lib/AdapterMappings.csv /opt/shrine/tomcat/lib/AdapterMappings.csv
 
 RUN echo $KEYSTORE_ALIAS
 
