@@ -50,8 +50,8 @@ FROM library/ubuntu:18.04
 # ENV i2b2_db_pass_IM=$i2b2_db_pass_IM
 # ENV i2b2_db_schema_IM=$i2b2_db_schema_IM
 
-RUN apt-get update
-RUN apt-get install openjdk-8-jdk wget -y
+RUN apt-get update \
+&& apt-get install openjdk-8-jdk wget -y
 
 ENV HTTPS_PROXY=false
 ENV HTTP_PROXY=false
