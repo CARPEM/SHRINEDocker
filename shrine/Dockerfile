@@ -126,7 +126,7 @@ RUN chmod +x /opt/shrine/tomcat/build_shrine.sh
 WORKDIR /opt/shrine/tomcat
 # RUN ./build_shrine.sh
 
-# ADD ./tomcat/lib/AdapterMappings.csv /opt/shrine/tomcat/lib/AdapterMappings.csv
+ADD ./tomcat/lib/AdapterMappings.csv /opt/shrine/tomcat/lib/AdapterMappings.csv
 
 RUN echo $KEYSTORE_ALIAS
 
