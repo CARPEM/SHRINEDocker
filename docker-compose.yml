@@ -44,7 +44,6 @@ services:
           - secrets
         volumes:
            - ./shrine/cert:/opt/cert
-           - ./shrine/tomcat/lib/adapterMapping:/opt/shrine/tomcat/lib/AdapterMapping
 
     webserver:
         build: ./webserver
