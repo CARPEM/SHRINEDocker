@@ -1,1 +1,11 @@
-select c_name, c_tablename, c_columndatatype from i2b2metadata.i2b2 where sourcesystem_cd = 'TEST_OSIRIS' and c_tablename in ('visit_dimension', 'patient_dimension', 'VISIT_DIMENSION', 'PATIENT_DIMENSION');
+-- Querying Data
+select  c_name, 'patient_dimension' as c_tablename,
+        c_columndatatype,c_basecode
+
+from i2b2metadata.osiris t
+where sourcesystem_cd = 'TEST_OSIRIS' and c_fullname like ('\\i2b2\\OSIRIS\\patient%')
+    union
+select  c_name, 'visit_dimension' as c_tablename,
+        c_columndatatype,c_basecode
+from i2b2metadata.osiris t
+where sourcesystem_cd = 'TEST_OSIRIS' and c_fullname like ('\\i2b2\\OSIRIS\\tumorPathologyEvent%');

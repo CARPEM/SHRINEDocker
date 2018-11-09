@@ -7,6 +7,7 @@ Created 2018/05/28
 """
 from script_pivot_transfert.SQLexecution import i2b2_interaction
 from script_pivot_transfert.request import SQL_request
+import re
 
 class PivotData:
     # construction de l'objet
@@ -37,7 +38,8 @@ class PivotData:
         return key_ref
 
     def add_var_to_dic_ref (self, ref_var, var):
-        self.list_key_ref[ref_var]['var'].append(var)
+        #print (len(re.match('.*_', var).group(0)))
+        self.list_key_ref[ref_var]['var'].append(var[len(re.match('.*_', var).group(0)):])
 
     def add_patient_dimension(self, dic_patient, dic_db_param):
         i = 0
@@ -52,9 +54,10 @@ class PivotData:
 
             # create patient in i2b2 (i2b2demodata.patient_dimension, i2b2demodata.patient_mapping) !!!!!!!!!!!!!!!!!!!!
             interac_i2b2.insert_data(req_i2b2.write_insert_patient_mapping(), (self.patient_val, id_patient, self.sourcedata, 'OSIRIS'))
-            interac_i2b2.insert_data(req_i2b2.write_insert_patient_dim(), [self.patient_val, 'TEST_OSIRIS'])
-            self.patient_val += 1
+            interac_i2b2.insert_data(req_i2b2.write_insert_patient_dim(), [self.patient_val, self.sourcedata])
             self.dic_patient[id_patient] = self.patient_val
+            self.patient_val += 1
+
 
             for var_data in dic_patient:
                 if dic_patient[var_data][i] != '':
@@ -80,7 +83,7 @@ class PivotData:
                 self.list_key_ref[self.link_visit]['listPatient'][id_patient] = {}
             self.list_key_ref[self.link_visit]['listPatient'][id_patient][dic_visit[self.link_modifier][i]]= self.dicData[id_patient][self.link_visit][dic_visit[self.link_modifier][i]]
 
-            # create visit !!!
+            # create event in visit_dimension !!!
             interac_i2b2.insert_data(req_i2b2.write_insert_visit_dim(), [self.dic_patient[id_patient], dic_visit[self.link_modifier][i], self.sourcedata])
 
 

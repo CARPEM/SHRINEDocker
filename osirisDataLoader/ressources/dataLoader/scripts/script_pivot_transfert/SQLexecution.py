@@ -74,10 +74,9 @@ class i2b2_interaction:
 
     def insert_data(self, request_i2b2, values):
         cursor = self.connect_i2b2()
-        #print(request_i2b2)
-        #print(values)
-        if not None in values :
-            cursor.execute(request_i2b2.encode('utf-8'), values)
+        print(request_i2b2)
+        print(values)
+        cursor.execute(request_i2b2.encode('utf-8'), values)
         cursor.close()
 
     def executeBasicRequestWithDate(self, request_i2b2):
@@ -106,9 +105,9 @@ class i2b2_interaction:
             if str(row[0]) not in resp_patient:
                 resp_patient.append(str(row[0]))
                 resp_group.append(str(row[1]))
-                res.append((str(row[0]), str(row[1]), str(row[2])))
+                res.append((str(row[0]), str(row[1]), str(row[2]), str(row[3])))
             elif str(row[1]) not in resp_group:
                 resp_group.append(str(row[1]))
-                res.append((str(row[0]), str(row[1]), str(row[2])))
+                res.append((str(row[0]), str(row[1]), str(row[2]), str(row[3])))
         cursor.close()
         return res
