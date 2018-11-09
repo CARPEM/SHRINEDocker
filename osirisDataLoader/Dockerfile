@@ -31,8 +31,7 @@ FROM python:latest
 # ENV SHRINE_ONT_PASSWORD=$SHRINE_ONT_PASSWORD
 
 RUN pip install psycopg2 cx_oracle mysql
-RUN apt-get update \
-    && apt-get install postgresql -y
+RUN apt-get update 
 
 WORKDIR /opt
 ADD ./ressources/ /opt/
