@@ -1,4 +1,4 @@
-FROM library/ubuntu;18.04
+FROM library/ubuntu:18.04
 
 # ENV I2B2_DB_HOST=$I2B2_DB_HOST
 # ENV SERVER_TYPE=$SERVER_TYPE
