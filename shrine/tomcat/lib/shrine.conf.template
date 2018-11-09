@@ -93,7 +93,7 @@ shrine {
 
     adapterLockoutAttemptsThreshold = 0
     setSizeObfuscation = true
-    adapterMappingsFileName = "AdapterMappings/AdapterMappings.csv"
+    adapterMappingsFileName = "AdapterMappings.csv"
 
     maxSignatureAge {
       minutes = 5
