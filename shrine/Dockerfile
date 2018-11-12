@@ -142,6 +142,10 @@ ADD ./ressources/sign-cert.sh /opt/shrine/sign-cert.sh
 RUN chmod +x /opt/shrine/sign-cert.sh
 ADD ./ressources/initHubCa.sh /opt/shrine/initHubCa.sh
 RUN chmod +x /opt/shrine/initHubCa.sh
+ADD ./ressources/backup-cert.sh /opt/shrine/backup-cert.sh
+RUN chmod +x /opt/shrine/backup-cert.sh
+ADD ./ressources/restore-cert.sh /opt/shrine/restore-cert.sh
+RUN chmod +x /opt/shrine/restore-cert.sh
 RUN touch deployed
 RUN echo 'false'>deployed
 
