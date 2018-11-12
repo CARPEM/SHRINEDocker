@@ -146,8 +146,8 @@ ADD ./ressources/backup-cert.sh /opt/shrine/backup-cert.sh
 RUN chmod +x /opt/shrine/backup-cert.sh
 ADD ./ressources/restore-cert.sh /opt/shrine/restore-cert.sh
 RUN chmod +x /opt/shrine/restore-cert.sh
-ADD ./ressources/restore-cert.sh /opt/shrine/logKeystore.sh
-RUN chmod +x /opt/shrine/logKeystore.sh
+# ADD ./ressources/restore-cert.sh /opt/shrine/logKeystore.sh
+# RUN chmod +x /opt/shrine/logKeystore.sh
 
 RUN touch deployed
 RUN echo 'false'>deployed
