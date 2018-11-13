@@ -129,7 +129,7 @@ Execute the following command
 sudo docker-compose exec shrine /bin/bash
 ```
 ```bash
-./backup-cert.sh
+./restore-cert.sh
 ```
 ```bash
 exit
