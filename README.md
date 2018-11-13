@@ -108,5 +108,32 @@ sudo docker-compose up
 ```
 ## It should work !!!!
 
+#Certificate Backup and restore
+If you are connected to the network you can backup your certificates states. This will enable to restore certificates status if you have to update or re-install the shrine container
+
+Execute the following command
+```bash
+sudo docker-compose exec shrine /bin/bash
+```
+```bash
+./backup-cert.sh
+```
+```bash
+exit
+```
+
+If you have to reinstall shrine you can restore your certificates status after installation.
+
+Execute the following command
+```bash
+sudo docker-compose exec shrine /bin/bash
+```
+```bash
+./backup-cert.sh
+```
+```bash
+exit
+```
+
 # SHRINE Hub
 You can find information [here](https://github.com/CARPEM/SHRINEDocker/wiki/HUB-management) for hub deployment and certificate management
