@@ -108,7 +108,7 @@ sudo docker-compose up
 ```
 ## It should work !!!!
 
-#Certificate Backup and restore
+# Certificate Backup and restore
 If you are connected to the network you can backup your certificates states. This will enable to restore certificates status if you have to update or re-install the shrine container
 
 Execute the following command
