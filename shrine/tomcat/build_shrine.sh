@@ -99,20 +99,20 @@ sed -i "s#<SHRINE_HOST>#$SHRINE_HOST#g" conf/server.xml
 #
 #	WEBCLIENT
 #
-
+if [ "$HUB" = "false" ]; then
 
 	cp webapps/shrine-webclient/i2b2_config_data.js.orig webapps/shrine-webclient/i2b2_config_data.js
 	sed -i "s#<PM_HOST>#$PM_HOST#g" webapps/shrine-webclient/i2b2_config_data.js
 	sed -i "s#<PM_PORT>#$PM_PORT#g" webapps/shrine-webclient/i2b2_config_data.js
 
-cp webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js.orig webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
-sed -i "s#<SHRINE_WEBCLIENT_HOST>#$SHRINE_WEBCLIENT_HOST#g" webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
-if [ "$IS_HUB" = "false" ]; then
-	sed -i "s#<SHRINE_WEBCLIENT_PORT>#$SHRINE_WEBCLIENT_PORT#g" webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
-else
-	sed -i "s#<SHRINE_WEBCLIENT_PORT>#7443#g" webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
+	cp webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js.orig webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
+	sed -i "s#<SHRINE_WEBCLIENT_HOST>#$SHRINE_WEBCLIENT_HOST#g" webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
+	if [ "$IS_HUB" = "false" ]; then
+		sed -i "s#<SHRINE_WEBCLIENT_PORT>#$SHRINE_WEBCLIENT_PORT#g" webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
+	else
+		sed -i "s#<SHRINE_WEBCLIENT_PORT>#7443#g" webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
+	fi
 fi
-
 cd /opt/shrine
 keytool -genkeypair -keysize 2048 -alias $KEYSTORE_ALIAS -dname "CN=$KEYSTORE_ALIAS, OU=$KEYSTORE_HUMAN, O=SHRINE Network, L=$KEYSTORE_CITY, S=$KEYSTORE_STATE, C=$KEYSTORE_COUNTRY" -keyalg RSA -keypass $KEYSTORE_PASSWORD -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE_FILE -storetype pkcs12 -validity 7300
 keytool -certreq -alias $KEYSTORE_ALIAS -keyalg RSA -file $KEYSTORE_ALIAS.csr -keypass $KEYSTORE_PASSWORD -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE_FILE -ext SAN=dns:$KEYSTORE_ALIAS,dns:shrine
