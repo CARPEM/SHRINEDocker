@@ -15,9 +15,10 @@ else
   echo 'Already deployed true'
 fi
 
-wget https://github.com/CARPEM/SHRINEDocker/raw/master/shrine/tomcat/lib/AdapterMappings.csv
-mv AdapterMappings.csv /opt/shrine/tomcat/lib/
-
+# if [ "$HUB" = "false" ]; then
+#   wget https://github.com/CARPEM/SHRINEDocker/raw/master/shrine/tomcat/lib/AdapterMappings.csv
+#   mv AdapterMappings.csv /opt/shrine/tomcat/lib/
+# fi
 
 
 /opt/shrine/tomcat/bin/catalina.sh run

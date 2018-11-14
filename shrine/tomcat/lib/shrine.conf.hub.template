@@ -1,0 +1,63 @@
+shrine {
+
+
+  hub {
+    	create = true
+      maxQueryWaitTime{
+        		minutes = 5
+    	}
+      downstreamNodes{
+        "local" = "https://shrine:6443/shrine/rest/adapter/requests"
+    	}
+        		shouldQuerySelf=false
+      }
+
+      breakdownResultOutputTypes {
+        PATIENT_AGE_COUNT_XML {
+          description = "Age patient breakdown"
+        }
+        PATIENT_RACE_COUNT_XML {
+          description = "Race patient breakdown"
+        }
+        PATIENT_VITALSTATUS_COUNT_XML {
+          description = "Vital Status patient breakdown"
+        }
+        PATIENT_GENDER_COUNT_XML {
+          description = "Gender patient breakdown"
+        }
+      }
+
+      queryEntryPoint {
+        create = false
+
+      } //end queryEntryPoint
+
+
+
+      adapter {
+        create = false
+
+      } // end adapter
+
+        networkStatusQuery = "\\\\SHRINE\\SHRINE\\Demographics\\Gender\\Male\\"
+        humanReadableNodeName = "<NODE_NAME>"
+        shrineDatabaseType = "mysql"
+
+        keystore {
+          file = "/opt/shrine/<KEYSTORE_FILE>"
+          password = "<KEYSTORE_PASSWORD>"
+          privateKeyAlias = "<KEYSTORE_ALIAS>"
+          keyStoreType = "JKS"
+          caCertAliases = ["shrine-hub-ca"]
+        }
+
+        problem {
+          problemHandler = "net.shrine.problem.LogAndDatabaseProblemHandler$"
+        }
+
+
+
+
+
+
+} // end shrine section

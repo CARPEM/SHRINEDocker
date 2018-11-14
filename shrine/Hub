@@ -106,27 +106,27 @@ WORKDIR /opt/java
 
 
 ADD ./ressources/shrine-war-1.22.8.war /opt/shrine/tomcat/webapps/shrine.war
-ADD ./ressources/steward-1.22.8.war /opt/shrine/tomcat/webapps/steward.war
-ADD ./ressources/shrine-proxy-1.22.8.war /opt/shrine/tomcat/webapps/shrine-proxy.war
-ADD ./ressources/dashboard-war-1.22.8.war /opt/shrine/tomcat/webapps/shrine-dashboard.war
-ADD ./ressources/meta-war-1.22.8.war /opt/shrine/tomcat/webapps/shrine-metadata.war.war
-ADD ./ressources/shrine-webclient-1.22.8-dist.zip /opt/shrine/tomcat/webapps/shrine-webclient-1.22.8-dist.zip
+#ADD ./ressources/steward-1.22.8.war /opt/shrine/tomcat/webapps/steward.war
+#ADD ./ressources/shrine-proxy-1.22.8.war /opt/shrine/tomcat/webapps/shrine-proxy.war
+#ADD ./ressources/dashboard-war-1.22.8.war /opt/shrine/tomcat/webapps/shrine-dashboard.war
+# ADD ./ressources/meta-war-1.22.8.war /opt/shrine/tomcat/webapps/shrine-metadata.war.war
+# ADD ./ressources/shrine-webclient-1.22.8-dist.zip /opt/shrine/tomcat/webapps/shrine-webclient-1.22.8-dist.zip
 
 WORKDIR /opt/shrine/tomcat/webapps/
-RUN unzip shrine-webclient-1.22.8-dist.zip
+# RUN unzip shrine-webclient-1.22.8-dist.zip
 
 ADD ./tomcat/conf/context.xml.template /opt/shrine/tomcat/conf/context.xml.orig
 ADD ./tomcat/conf/server.xml.template /opt/shrine/tomcat/conf/server.xml.orig
-ADD ./tomcat/lib/shrine.conf.template /opt/shrine/tomcat/lib/shrine.conf.orig
-ADD ./tomcat/shrine-webclient/i2b2_config_data.js.template 	/opt/shrine/tomcat/webapps/shrine-webclient/i2b2_config_data.js.orig
-ADD ./tomcat/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js.template /opt/shrine/tomcat/webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js.orig
+ADD ./tomcat/lib/shrine.conf.hub.template /opt/shrine/tomcat/lib/shrine.conf.orig
+# ADD ./tomcat/shrine-webclient/i2b2_config_data.js.template 	/opt/shrine/tomcat/webapps/shrine-webclient/i2b2_config_data.js.orig
+# ADD ./tomcat/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js.template /opt/shrine/tomcat/webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js.orig
 
 ADD ./tomcat/build_shrine.sh /opt/shrine/tomcat/build_shrine.sh
 RUN chmod +x /opt/shrine/tomcat/build_shrine.sh
 WORKDIR /opt/shrine/tomcat
 # RUN ./build_shrine.sh
 
-ADD ./tomcat/lib/AdapterMappings.csv /opt/shrine/tomcat/lib/AdapterMappings.csv
+# ADD ./tomcat/lib/AdapterMappings.csv /opt/shrine/tomcat/lib/AdapterMappings.csv
 
 RUN echo $KEYSTORE_ALIAS
 
@@ -136,12 +136,12 @@ RUN ln -s /opt/java/jdk1.8.0_192/bin/keytool /usr/local/bin/keytool
 
 ADD ./ressources/start.sh /opt/shrine/start.sh
 RUN chmod +x /opt/shrine/start.sh
-ADD ./ressources/import-cert.sh /opt/shrine/import-cert.sh
-RUN chmod +x /opt/shrine/import-cert.sh
-# ADD ./ressources/sign-cert.sh /opt/shrine/sign-cert.sh
-# RUN chmod +x /opt/shrine/sign-cert.sh
-#ADD ./ressources/initHubCa.sh /opt/shrine/initHubCa.sh
-# RUN chmod +x /opt/shrine/initHubCa.sh
+# ADD ./ressources/import-cert.sh /opt/shrine/import-cert.sh
+# RUN chmod +x /opt/shrine/import-cert.sh
+ADD ./ressources/sign-cert.sh /opt/shrine/sign-cert.sh
+RUN chmod +x /opt/shrine/sign-cert.sh
+ADD ./ressources/initHubCa.sh /opt/shrine/initHubCa.sh
+RUN chmod +x /opt/shrine/initHubCa.sh
 ADD ./ressources/backup-cert.sh /opt/shrine/backup-cert.sh
 RUN chmod +x /opt/shrine/backup-cert.sh
 ADD ./ressources/restore-cert.sh /opt/shrine/restore-cert.sh
@@ -149,9 +149,9 @@ RUN chmod +x /opt/shrine/restore-cert.sh
 # ADD ./ressources/restore-cert.sh /opt/shrine/logKeystore.sh
 # RUN chmod +x /opt/shrine/logKeystore.sh
 
+ENV HUB=true
+
 RUN touch deployed
 RUN echo 'false'>deployed
-
-ENV HUB=false
 
 ENTRYPOINT ["/opt/shrine/start.sh"]
