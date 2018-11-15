@@ -43,23 +43,29 @@ sed -i "s#<SHRINE_PORT>#$SHRINE_PORT#g" lib/shrine.conf
 
 #broadcaster
 if [ "$IS_HUB" = "true" ]; then
-	sed -i "s#<SHRINE_HUB_HOST>#shrine#g" lib/shrine.conf
+	sed -i "s#<SHRINE_HUB_HOST>#hub#g" lib/shrine.conf
+	sed -i "s#<SHRINE_HUB_PORT>#6443#g" lib/shrine.conf
 	echo 'is HUB ==> TRUE'
 else
 	sed -i "s#<SHRINE_HUB_HOST>#$SHRINE_HUB_HOST#g" lib/shrine.conf
+	sed -i "s#<SHRINE_HUB_PORT>#$SHRINE_HUB_PORT#g" lib/shrine.conf
 	echo 'is HUB ==> FALSE'
 fi
-sed -i "s#<SHRINE_HUB_PORT>#$SHRINE_HUB_PORT#g" lib/shrine.conf
+
 
 #HUB
 
-if [ "$IS_HUB" = "true" ]; then
-	sed -i "s#<HUB>#  hub {\n	create = true\n	maxQueryWaitTime{\n		minutes = 5\n	}\n	downstreamNodes{\n		}\n		shouldQuerySelf=true\n	}#g" lib/shrine.conf
-	echo 'is HUB ==> TRUE'
-else
-	sed -i "s#<HUB>#  hub {\n	create = false\n	}#g" lib/shrine.conf
-	echo 'is HUB ==> FALSE'
-fi
+sed -i "s#<HUB>#  hub {\n	create = false\n	}#g" lib/shrine.conf
+
+# if [ "$IS_HUB" = "true" ]; then
+# 	#sed -i "s#<HUB>#  hub {\n	create = true\n	maxQueryWaitTime{\n		minutes = 5\n	}\n	downstreamNodes{\n		}\n		shouldQuerySelf=true\n	}#g" lib/shrine.conf
+# 	sed -i "s#<HUB>#  hub {\n	create = false\n	}#g" lib/shrine.conf
+# 	echo 'is HUB ==> TRUE'
+# else
+# 	sed -i "s#<HUB>#  hub {\n	create = false\n	}#g" lib/shrine.conf
+# 	echo 'is HUB ==> FALSE'
+# fi
+
 
 #keystore
 sed -i "s#<KEYSTORE_FILE>#$KEYSTORE_FILE#g" lib/shrine.conf
@@ -93,20 +99,28 @@ sed -i "s#<SHRINE_HOST>#$SHRINE_HOST#g" conf/server.xml
 #
 #	WEBCLIENT
 #
+if [ "$HUB" = "false" ]; then
 
-cp webapps/shrine-webclient/i2b2_config_data.js.orig webapps/shrine-webclient/i2b2_config_data.js
-sed -i "s#<PM_HOST>#$PM_HOST#g" webapps/shrine-webclient/i2b2_config_data.js
-sed -i "s#<PM_PORT>#$PM_PORT#g" webapps/shrine-webclient/i2b2_config_data.js
+	cp webapps/shrine-webclient/i2b2_config_data.js.orig webapps/shrine-webclient/i2b2_config_data.js
+	sed -i "s#<PM_HOST>#$PM_HOST#g" webapps/shrine-webclient/i2b2_config_data.js
+	sed -i "s#<PM_PORT>#$PM_PORT#g" webapps/shrine-webclient/i2b2_config_data.js
 
-
-cp webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js.orig webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
-sed -i "s#<SHRINE_WEBCLIENT_HOST>#$SHRINE_WEBCLIENT_HOST#g" webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
-sed -i "s#<SHRINE_WEBCLIENT_PORT>#$SHRINE_WEBCLIENT_PORT#g" webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
-
+	cp webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js.orig webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
+	sed -i "s#<SHRINE_WEBCLIENT_HOST>#$SHRINE_WEBCLIENT_HOST#g" webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
+	if [ "$IS_HUB" = "false" ]; then
+		sed -i "s#<SHRINE_WEBCLIENT_PORT>#$SHRINE_WEBCLIENT_PORT#g" webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
+	else
+		sed -i "s#<SHRINE_WEBCLIENT_PORT>#7443#g" webapps/shrine-webclient/js-i2b2/cells/SHRINE/cell_config_data.js
+	fi
+fi
 cd /opt/shrine
 keytool -genkeypair -keysize 2048 -alias $KEYSTORE_ALIAS -dname "CN=$KEYSTORE_ALIAS, OU=$KEYSTORE_HUMAN, O=SHRINE Network, L=$KEYSTORE_CITY, S=$KEYSTORE_STATE, C=$KEYSTORE_COUNTRY" -keyalg RSA -keypass $KEYSTORE_PASSWORD -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE_FILE -storetype pkcs12 -validity 7300
 keytool -certreq -alias $KEYSTORE_ALIAS -keyalg RSA -file $KEYSTORE_ALIAS.csr -keypass $KEYSTORE_PASSWORD -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE_FILE -ext SAN=dns:$KEYSTORE_ALIAS,dns:shrine
-keytool -genkeypair -keysize 2048 -alias ${KEYSTORE_ALIAS}_https -dname "CN=$KEYSTORE_ALIAS, OU=HTTPS CA, O=SHRINE Network, L=$KEYSTORE_CITY, S=$KEYSTORE_STATE, C=$KEYSTORE_COUNTRY" -keyalg RSA -keypass $KEYSTORE_PASSWORD -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE_FILE -storetype pkcs12 -validity 7300 -ext SAN=dns:$KEYSTORE_ALIAS,dns:shrine
+if [ "$HUB" = "true" ]; then
+	keytool -genkeypair -keysize 2048 -alias ${KEYSTORE_ALIAS}_https -dname "CN=$KEYSTORE_ALIAS, OU=HTTPS CA, O=SHRINE Network, L=$KEYSTORE_CITY, S=$KEYSTORE_STATE, C=$KEYSTORE_COUNTRY" -keyalg RSA -keypass $KEYSTORE_PASSWORD -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE_FILE -storetype pkcs12 -validity 7300 -ext SAN=dns:$KEYSTORE_ALIAS,dns:hub
+else
+	keytool -genkeypair -keysize 2048 -alias ${KEYSTORE_ALIAS}_https -dname "CN=$KEYSTORE_ALIAS, OU=HTTPS CA, O=SHRINE Network, L=$KEYSTORE_CITY, S=$KEYSTORE_STATE, C=$KEYSTORE_COUNTRY" -keyalg RSA -keypass $KEYSTORE_PASSWORD -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE_FILE -storetype pkcs12 -validity 7300 -ext SAN=dns:$KEYSTORE_ALIAS,dns:shrine
+fi
 keytool -export -alias ${KEYSTORE_ALIAS}_https -storepass $KEYSTORE_PASSWORD -file ${KEYSTORE_ALIAS}_HTTPS.cer -keystore $KEYSTORE_FILE
 keytool -import -v -trustcacerts -alias shrine-hub-ca -file ${KEYSTORE_ALIAS}_HTTPS.cer -keystore $KEYSTORE_FILE -storepass $KEYSTORE_PASSWORD -noprompt
 #keytool -genkeypair -keysize 2048 -alias shrine -dname "CN=shrine, OU=shrine local, O=SHRINE Network, L=$KEYSTORE_CITY, S=$KEYSTORE_STATE, C=$KEYSTORE_COUNTRY" -keyalg RSA -keypass $KEYSTORE_PASSWORD -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE_FILE -storetype pkcs12 -validity 7300
