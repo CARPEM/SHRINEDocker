@@ -85,9 +85,10 @@ The hub administrator will send you back:
 *	His own certificate (shrine-hub-ca.crt)
 * Your signed certificate (your hostname-signed.crt)
 
-### Import the hub certificate and your signed certificate
+### Import the hub certificates and your signed certificate
 
 * Put the hub certificate (shrine-hub-ca.crt) in the shrine/cert/ directory of the project.
+* Put the hub https certificate (shrine-hub-https-ca.crt) in the shrine/cert/ directory of the project.
 * Put your signed (<your_hostname>-signed.crt) certificate in the shrine/cert/ directory of the project.
 
 Execute the following command
