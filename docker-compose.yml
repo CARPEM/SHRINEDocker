@@ -6,8 +6,8 @@ services:
     i2b2app:
        build: ./i2b2app
        restart: on-failure
-       ports:
-          - 8080:8080
+       # ports:
+       #    - 8080:8080
        environment:
          SECRETS: /run/secrets/secrets
        secrets:
@@ -38,6 +38,7 @@ services:
         restart: on-failure
         ports:
            - 6443:6443
+      #    - 8080:8080
         environment:
           SECRETS: /run/secrets/secrets
         secrets:

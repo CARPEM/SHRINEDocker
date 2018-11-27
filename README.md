@@ -38,6 +38,7 @@ Edit secrets.txt and modify parameters :
 
 For testing purpose it is possible to leave other parameters. However it is highly recommanded to modifiy every login and passwords in order to secure the app.
 
+**Remarque:** If your are behind an https reverse proxy read this [page][https://github.com/CARPEM/SHRINEDocker/wiki/HTTPS-reverse-proxy] 
 ## Build and start the APP
 From the root directory of the project
 ```bash
