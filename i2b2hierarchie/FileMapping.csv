@@ -1,0 +1,7 @@
+Entity,FileName
+Patient,
+TumorPathologyEvent,
+TNM,
+Treatment,
+Drug,
+ResponseEvaluation,

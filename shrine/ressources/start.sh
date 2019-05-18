@@ -16,7 +16,7 @@ else
 fi
 
 if [ "$HUB" = "false" ]; then
-  wget https://github.com/CARPEM/SHRINEDocker/raw/master/shrine/tomcat/lib/AdapterMappings-osiris.csv
+  wget -O AdapterMappings.csv https://github.com/CARPEM/SHRINEDocker/raw/dataloader/shrine/tomcat/lib/AdapterMapping-osiris.csv 
   mv AdapterMappings.csv /opt/shrine/tomcat/lib/
 fi
 

@@ -15,19 +15,20 @@ RUN chmod +x /opt/wget_proxy_setup.sh
 
 RUN /opt/wget_proxy_setup.sh
 
-RUN wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=a" "http://download.oracle.com/otn-pub/java/jdk/8u192-b12/750e1c8617c5452694857ad95c3ee230/jdk-8u192-linux-x64.tar.gz" \
-	&& tar xzf jdk-8u192-linux-x64.tar.gz
+# RUN wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=a" "http://download.oracle.com/otn-pub/java/jdk/8u192-b12/750e1c8617c5452694857ad95c3ee230/jdk-8u192-linux-x64.tar.gz" \
+	# && tar xzf jdk-8u192-linux-x64.tar.gz
 
-RUN chown -R root: jdk1.8.0_*
+RUN  apt-get install openjdk-8-jdk openjdk-8-jre -y
+# RUN chown -R root: jdk1.8.0_*
 
 #-- for JAVA (in case you have another version of Java installed)
-RUN 	update-alternatives --install /usr/bin/java java /opt/java/jdk1.8.0_192/bin/java 1\
+# RUN 	update-alternatives --install /usr/bin/java java /opt/java/jdk1.8.0_192/bin/java 1\
 #-- for JAR (in case you have another version of Java installed)
-	&& 	update-alternatives --install /usr/bin/jar jar /opt/java/jdk1.8.0_192/bin/jar 1\
+	# && 	update-alternatives --install /usr/bin/jar jar /opt/java/jdk1.8.0_192/bin/jar 1\
 #-- for JAVAC (in case you have another version of Java installed)
-	&& 	update-alternatives --install /usr/bin/javac javac /opt/java/jdk1.8.0_192/bin/javac 1 \
-	&&	update-alternatives --config javac  \
-	&& 	rm /opt/java/jdk-8u192*.tar.gz
+	# && 	update-alternatives --install /usr/bin/javac javac /opt/java/jdk1.8.0_192/bin/javac 1 \
+	# &&	update-alternatives --config javac  \
+	# && 	rm /opt/java/jdk-8u192*.tar.gz
 
 #-- setting JAVA variables
 RUN 	export JAVA_HOME=/opt/java/jdk1.8.0_172 \
@@ -149,7 +150,7 @@ RUN chmod +x /opt/shrine/restore-cert.sh
 # ADD ./ressources/restore-cert.sh /opt/shrine/logKeystore.sh
 # RUN chmod +x /opt/shrine/logKeystore.sh
 
-ENV HUB=true
+ENV HUB="true"
 
 RUN touch deployed
 RUN echo 'false'>deployed

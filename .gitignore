@@ -3,3 +3,6 @@ shrine/cert/*
 set_env.sh
 secrets.txt
 osirisDataLoader/data_to_load/*.*
+osirisDataLoader/tempData
+*.pyc
+.~lock*

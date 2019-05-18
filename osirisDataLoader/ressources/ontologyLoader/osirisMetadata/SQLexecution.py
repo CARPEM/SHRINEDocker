@@ -38,7 +38,7 @@ class i2b2_interaction:
 			return cur
 
 		return None
-    
+
     ###### Ajout vianney méthode pour créer la table ################"
 	def create_metadata_table(self,table,schema) :
 		create_script = "CREATE TABLE "+ schema+"."+table.upper()
@@ -48,7 +48,7 @@ class i2b2_interaction:
 		create_script += "C_SYNONYM_CD CHAR(1)		NOT NULL, "
 		create_script += "C_VISUALATTRIBUTES CHAR(3)	NOT NULL, "
 		create_script += "C_TOTALNUM INT			NULL, "
-		create_script += "C_BASECODE VARCHAR(50)	NULL, "
+		create_script += "C_BASECODE VARCHAR(200)	NULL, "
 		create_script += "C_METADATAXML TEXT		NULL, "
 		create_script += "C_FACTTABLECOLUMN VARCHAR(50)	NOT NULL, "
 		create_script += "C_TABLENAME VARCHAR(50)	NOT NULL, "
@@ -68,7 +68,7 @@ class i2b2_interaction:
 		create_script += "C_PATH	VARCHAR(700)   NULL,"
 		create_script += "C_SYMBOL	VARCHAR(50)	NULL"
 		create_script += ") ;"
-   
+
 		create_fullname_index = "CREATE INDEX META_FULLNAME_IDX_"+table+" ON "+schema+"."+table+"(C_FULLNAME)"
 		create_applied_index = "CREATE INDEX META_APPLIED_PATH_IDX_"+table+" ON "+schema+"."+table+"(M_APPLIED_PATH)"
 		create_exclusion_index = "CREATE INDEX META_EXCLUSION_IDX_"+table+" ON "+schema+"."+table+"(M_EXCLUSION_CD)"
@@ -84,7 +84,7 @@ class i2b2_interaction:
 		cur.execute(create_hlevel_index)
 		cur.execute(create_synonym_index)
 		self.dbcon.commit()
-		
+
 	###### Ajout du chemin dans table_access ################"
 	def insert_table_access(self,table,schema) :
 		delete_table_access="DELETE FROM "+schema+".table_access where c_fullname='\\i2b2\\OSIRIS\\\'"
@@ -94,15 +94,16 @@ class i2b2_interaction:
 		self.dbcon.commit()
 		cur.execute(insert_table_access)
 		self.dbcon.commit()
-		
-		
+
+
+
 	def send_data (self, input_file, table) :
 		f = open (input_file, 'r')
 		cursor = self.connect_i2b2()
 		#cursor.execute(request_i2b2.encode('utf-8'))
 		cursor.copy_from(f, table, sep=';', null='None')
 		f.close()
-		
+
 	def send_data_2 (self, input_file, table,columns_def) :
 		f = open (input_file, 'r')
 		cursor = self.connect_i2b2()
@@ -111,4 +112,48 @@ class i2b2_interaction:
 			columns=columns_def)
 		f.close()
 
+	def truncate_data (self,schema,table) :
+		truncate_data_sql="TRUNCATE TABLE " +schema+ "." + table
+		cur = self.connect_i2b2()
+		cur.execute(truncate_data_sql)
+		self.dbcon.commit()
 
+	def create_concept_dimension_file (self) :
+		concept_dimension = open ('/opt/data_to_load/concept_dimension.txt', 'w')
+		insert_data_sql="""
+			SELECT distinct c_fullname,C_BASECODE,C_NAME,' ' as concept_blob,update_date,download_date,import_date,sourcesystem_cd,'1' as t
+			FROM i2b2metadata.osiris
+			WHERE C_VISUALATTRIBUTES like 'L%' or (C_VISUALATTRIBUTES like 'F%' AND C_BASECODE not like 'ID\_%') 
+		"""
+		cursor = self.connect_i2b2()
+		cursor.execute(insert_data_sql)
+
+		for row in cursor:
+			for i in range(0,9):
+				t=str(row[i]).replace("\\","\\\\")
+				if i == 8 :
+					concept_dimension.write(t+ "\n")
+				else:
+					concept_dimension.write(t + ";")
+
+		concept_dimension.close()
+
+	def create_modifier_dimension_file (self) :
+		concept_dimension = open ('/opt/data_to_load/modifier_dimension.txt', 'w')
+		insert_data_sql="""
+			SELECT distinct c_fullname,C_BASECODE,C_NAME,' ' as concept_blob,update_date,download_date,import_date,sourcesystem_cd,'1' as t
+			FROM i2b2metadata.osiris
+			WHERE C_VISUALATTRIBUTES like 'R%'
+		"""
+		cursor = self.connect_i2b2()
+		cursor.execute(insert_data_sql)
+
+		for row in cursor:
+			for i in range(0,9):
+				t=str(row[i]).replace("\\","\\\\")
+				if i == 8 :
+					concept_dimension.write(t+ "\n")
+				else:
+					concept_dimension.write(t + ";")
+
+		concept_dimension.close()

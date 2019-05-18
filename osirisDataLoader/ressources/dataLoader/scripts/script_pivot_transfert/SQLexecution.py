@@ -38,11 +38,11 @@ class i2b2_interaction:
             cur = dbcon.cursor()
             return cur
 
-        elif self.type_connection.lower() == 'mysql':
-            dbcon = mysql.connector.connect(user=self.BD_user, database=self.DB_name, password=self.DB_password, host=self.DB_host, port=self.DB_port)
-            dbcon.autocommit = True
-            cur = dbcon.cursor()
-            return cur
+        # elif self.type_connection.lower() == 'mysql':
+        #     dbcon = mysql.connector.connect(user=self.BD_user, database=self.DB_name, password=self.DB_password, host=self.DB_host, port=self.DB_port)
+        #     dbcon.autocommit = True
+        #     cur = dbcon.cursor()
+        #     return cur
 
         return None
 

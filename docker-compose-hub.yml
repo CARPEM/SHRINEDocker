@@ -5,7 +5,7 @@ services:
 
     i2b2app:
        build: ./i2b2app
-       restart: on-failure
+       restart: "no"
        # ports:
        #    - 8080:8080
        environment:
@@ -15,17 +15,19 @@ services:
 
     i2b2db:
         build: ./i2b2db
-        restart: on-failure
+        restart: "no"
         # links:
         #    - i2b2app
         environment:
           SECRETS: /run/secrets/secrets
+        ports:
+           - 5432:5432
         secrets:
           - secrets
 
     shrinedb:
         build: ./shrinedb
-        restart: on-failure
+        restart: "no"
         # links:
         #    - shrine
         environment:
@@ -35,7 +37,7 @@ services:
 
     shrine:
         build: ./shrine
-        restart: on-failure
+        restart: "no"
         ports:
            - 7443:6443
         environment:
@@ -46,23 +48,23 @@ services:
            - ./shrine/cert/shrine:/opt/cert
 
     hub:
-       build:
-         context: ./shrine
-         dockerfile: Hub
-       restart: on-failure
-       ports:
-          - 6443:6443
-     #    - 8080:8080
-       environment:
-         SECRETS: /run/secrets/secrets
-       secrets:
-         - secrets
-       volumes:
-          - ./shrine/cert/hub:/opt/cert
+      build:
+        context: ./shrine
+        dockerfile: Hub
+      restart: "no"
+      ports:
+           - 6443:6443
+           # - 8080:8080
+      environment:
+        SECRETS: /run/secrets/secrets
+      secrets:
+        - secrets
+      volumes:
+        - ./shrine/cert/hub:/opt/cert
 
     webserver:
         build: ./webserver
-        restart: on-failure
+        restart: "no"
         ports:
            - 80:80
         # links:
@@ -75,16 +77,17 @@ services:
           - secrets
     #
     #
-    # pgadmin:
-    #     image: thajeztah/pgadmin4
-    #     restart: on-failure
-    #     ports:
-    #        - 5050:5050
-    omnidb:
-      image: sorrell/alpine-omnidb
-      restart: on-failure
-      ports:
-        - 5050:9000
+    pgadmin:
+        image: thajeztah/pgadmin4
+        restart: "no"
+        restart: on-failure
+        ports:
+           - 5050:5050
+    # omnidb:
+    #   image: sorrell/alpine-omnidb
+    #   restart: "no"
+    #   ports:
+    #     - 5050:9000
 
 secrets:
   secrets:

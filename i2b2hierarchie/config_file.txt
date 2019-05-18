@@ -1,0 +1,10 @@
+i2b2metadata.i2b2
+c_hlevel;c_fullname;c_name;c_synonym_cd;c_visualattributes;c_totalnum;c_basecode;c_metadataxml;c_facttablecolumn;c_tablename;c_columnname;c_columndatatype;c_operator;c_dimcode;c_comment;c_tooltip;m_applied_path;update_date;download_date;import_date;sourcesystem_cd;valuetype_cd;m_exclusion_cd;c_path;c_symbol
+i2b2demodata.concept_dimension
+concept_path;concept_cd;name_char;concept_blob;update_date;download_date;import_date;sourcesystem_cd;upload_id
+i2b2demodata.modifier_dimension
+modifier_path;modifier_cd;name_char;modifier_blob;update_date;download_date;import_date;sourcesystem_cd;upload_id
+shrine_ont.shrine
+c_hlevel;c_fullname;c_name;c_synonym_cd;c_visualattributes;c_totalnum;c_basecode['SHRINE|', @];c_metadataxml;c_facttablecolumn;c_tablename;c_columnname;c_columndatatype;c_operator;c_dimcode;c_comment;c_tooltip;update_date;download_date;import_date;sourcesystem_cd;valuetype_cd;m_applied_path;m_exclusion_cd
+i2b2demodata.visit_dimension
+encounter_num;patient_num;start_date;end_date

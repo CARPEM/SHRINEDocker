@@ -33,12 +33,24 @@ class PivotData:
             key_ref[ref_var]['name'] = dic_ref_files['ref_var'][i]
             key_ref[ref_var]['nameFile'] = dic_ref_files['filename'][i]
             key_ref[ref_var]['parentFileRef'] = dic_ref_files['parent_ref'][i]
+            key_ref[ref_var]['listKeyRef'] = self.add_listInstance(key_ref[ref_var]['parentFileRef'], key_ref)
             key_ref[ref_var]['listPatient'] = {}
             i += 1
         return key_ref
 
+    def add_listInstance(self, parent_key, key_ref):
+        listKeyRef = []
+        if parent_key != 'Patient_Id' and parent_key in key_ref:
+            listKeyRef.append(parent_key)
+            for key in key_ref[parent_key]['listKeyRef']:
+                listKeyRef.append(key)
+        return listKeyRef
+
     def add_var_to_dic_ref (self, ref_var, var):
-        #print (len(re.match('.*_', var).group(0)))
+        # print (var)
+        # print (len(re.match('.*_', var).group(0)))
+        # print ("test")
+        # print (self.list_key_ref[ref_var]['var'])
         self.list_key_ref[ref_var]['var'].append(var[len(re.match('.*_', var).group(0)):])
 
     def add_patient_dimension(self, dic_patient, dic_db_param):
@@ -100,6 +112,7 @@ class PivotData:
         iaf = 0
         var_ref = self.search_ref(dic_file, name_file)
         for varfile in dic_file:
+            print(var_ref)
             self.add_var_to_dic_ref(var_ref, varfile)
         for patient in dic_file[self.link_patient]:
             idp = dic_file[self.link_modifier][iaf]
@@ -142,8 +155,12 @@ class PivotData:
             key_dic_file[key_var_file] = {}
             key_dic_file[key_var_file][idp] ={}
             self.list_key_ref[key_var_file]['listPatient'][patient][idp] = key_dic_file[key_var_file][idp]
+        # TODO ajout des instances @David
+        for instance_ref in self.list_key_ref[key_var_file]['listKeyRef']:
+            if instance_ref != self.list_key_ref[key_var_file]['parentFileRef']:
+                self.list_key_ref[key_var_file]['listPatient'][patient][idp][instance_ref] = self.list_key_ref[self.list_key_ref[key_var_file]['parentFileRef']]['listPatient'][patient][ref][instance_ref]
 
-    def read_auto_val_patient(self) :
+    def read_auto_val_patient(self):
         f_read = open(self.file_PI, 'r')
         value = int(f_read.read())
         f_read.close()

@@ -9,6 +9,7 @@ fonction : script lisant les fichier csv ou de type csv et renvoyant un dictionn
     Dic_var[var2]=[data21, data22, ...]
     ...
 """
+import csv
 
 class lecture_csv_file:
 
@@ -54,3 +55,38 @@ class lecture_csv_file:
             liste = line.replace('\n', '').split(self.separator)
             self.dic_data[liste[0]] = liste[1]
         return self.dic_data
+
+    def copy_csv_to_dict_tuple_index(self):
+        '''
+        Fonction retournant un dict sous forme :
+        {(concept,column): {'start_date': {value},'end_date': {value},'concept_modified': {value}}
+
+        To get end date value : my_dict['TumorPathologyEvent','Type']['end_date']
+
+        :return: dico :
+        {('Drug', 'Code'): {'concept_modified': 'Treatment','end_date': '','start_date': ''},
+        ('Patient', 'LastNewsStatus'): {'concept_modified': '','end_date': '','start_date': 'LastNewsDate'},
+        ('TNM', 'M'): {'concept_modified': 'TNM', 'end_date': '', 'start_date': ''},
+        ('TNM', 'N'): {'concept_modified': 'TNM', 'end_date': '', 'start_date': ''},
+        ('TNM', 'T'): {'concept_modified': 'TNM', 'end_date': '', 'start_date': ''},
+        ('TNM', 'TNMType'): {'concept_modified': 'TNM','end_date': '','start_date': ''},
+        ('TNM', 'TNMVersion'): {'concept_modified': 'TNM','end_date': '','start_date': ''},
+        ('TumorPathologyEvent', 'Laterality'): {'concept_modified': '','end_date': 'EndDate','start_date': 'StartDate'},
+        ('TumorPathologyEvent', 'MorphologyCode'): {'concept_modified': '','end_date': 'EndDate','start_date': 'StartDate'},
+        ('TumorPathologyEvent', 'TopographyCode'): {'concept_modified': '','end_date': 'EndDate','start_date': 'StartDate'},
+        ('TumorPathologyEvent', 'Type'): {'concept_modified': '','end_date': 'EndDate','start_date': 'StartDate'}}
+
+        '''
+        self.my_dict = {}
+        with open(self.filename, 'r') as csv_file:
+            reader = csv.DictReader(csv_file)
+            start_date = 'start_date'
+            end_date = 'end_date'
+            concept_modified = 'concept_modified'
+
+            # parsing and creating a row in my_dict for each row in mapping
+            for row in reader:
+                self.my_dict[(row['concept'], row['column'])] = {start_date: row['start_date'],
+                                                                 end_date: row['end_date'],
+                                                                 concept_modified: row['concept_modified']}
+        return self.my_dict

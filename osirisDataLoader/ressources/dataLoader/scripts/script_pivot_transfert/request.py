@@ -20,7 +20,7 @@ class SQL_request:
         elif dic_data['table'] == 'visit_dimension':
             request = 'UPDATE i2b2demodata.visit_dimension SET ' + dic_data['var'] + ' = %s WHERE patient_num = %s AND encounter_num = %s;'
         elif dic_data['table'] == 'concept_dimension':
-            request = 'INSERT INTO i2b2demodata.observation_fact (patient_num, encounter_num, start_date, concept_cd, tval_char, nval_num, import_date, modifier_cd, instance_num, sourcesystem_cd, provider_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+            request = 'INSERT INTO i2b2demodata.observation_fact (patient_num, encounter_num, start_date, concept_cd, tval_char, nval_num, import_date, modifier_cd, instance_num, sourcesystem_cd, provider_id,end_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)'
         return request
 
     def write_insert_patient_dim(self):

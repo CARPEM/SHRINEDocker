@@ -36,7 +36,7 @@ RUN apt-get update --fix-missing \
 
 WORKDIR /opt
 ADD ./ressources/ /opt/
-
+ADD ./mapping_files/ /opt/mapping_files/
 
 # ADD ./ressources/ontologyLoader/loadOntology.sh /opt/loadOntology.sh
 

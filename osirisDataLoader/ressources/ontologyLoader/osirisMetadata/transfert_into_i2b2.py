@@ -27,21 +27,6 @@ def transfert (path_metafile, path_conceptfile, path_modiffile, path_shrine):
 	DB_type = os.environ['SERVER_TYPE']
 	metadata_schema = os.environ['i2b2_db_schema_ONT']
 	metadata_table = "osiris"
-    # serveur galaxy
-    # DB_host = 'egp-svldcarp3.egp.aphp.fr'
-    # DB_name = 'i2b2'
-    # DB_port = '49162'
-    # BD_user = 'postgres'
-    # DB_password = 'postgres'
-    # DB_type = 'postgresql'
-
-    # serveur local
-    # DB_host = 'localhost'
-    # DB_name = 'i2b2'
-    # DB_port = '5432'
-    # BD_user = 'postgres'
-    # DB_password = 'postgres'
-    # DB_type = 'postgresql'
 
     ### Ajout vianney on crée la table et on insert dans table access (i2b2)#####
 	execution = i2b2_interaction(DB_type, DB_host, DB_name, DB_port, BD_user, DB_password)
@@ -90,8 +75,18 @@ def transfert (path_metafile, path_conceptfile, path_modiffile, path_shrine):
 	BD_user = os.environ['i2b2_db_user_CRC']
 	DB_password = os.environ['i2b2_db_pass_CRC']
 	execution = i2b2_interaction(DB_type, DB_host, DB_name, DB_port, BD_user, DB_password)
+	BD_user = os.environ['i2b2_db_user_ONT']
+	DB_password = os.environ['i2b2_db_pass_ONT']
+	execution = i2b2_interaction(DB_type, DB_host, DB_name, DB_port, BD_user, DB_password)
+	execution.create_concept_dimension_file()
+	execution.create_modifier_dimension_file()
+	BD_user = os.environ['i2b2_db_user_CRC']
+	DB_password = os.environ['i2b2_db_pass_CRC']
+	execution = i2b2_interaction(DB_type, DB_host, DB_name, DB_port, BD_user, DB_password)
+	execution.truncate_data('i2b2demodata','concept_dimension')
 	execution.send_data(path_conceptfile, 'i2b2demodata.concept_dimension')
 	execution.dbcon.commit()
+	execution.truncate_data('i2b2demodata','modifier_dimension')
 	execution.send_data(path_modiffile, 'i2b2demodata.modifier_dimension')
 	execution.dbcon.commit()
 
@@ -103,10 +98,10 @@ def transfert (path_metafile, path_conceptfile, path_modiffile, path_shrine):
 
 def main():
 
-	path_metafile = '/opt/ontologyLoader/osirisMetadata/see2i2b2_meta.txt'
-	path_conceptfile = '/opt/ontologyLoader/osirisMetadata/see2i2b2_demo.txt'
-	path_modiffile = '/opt/ontologyLoader/osirisMetadata/see2i2b2_modif.txt'
-	path_shrine = '/opt/ontologyLoader/osirisMetadata/see2shrine_.txt'
+	path_metafile = '/opt/ontologyLoader/osirisMetadata/see3i2b2_meta.txt'
+	path_conceptfile = '/opt/data_to_load/concept_dimension.txt'
+	path_modiffile = '/opt/data_to_load/modifier_dimension.txt'
+	path_shrine = '/opt/ontologyLoader/osirisMetadata/see3shrine_.txt'
 
 	transfert (path_metafile, path_conceptfile, path_modiffile, path_shrine)
 

@@ -1,0 +1,16 @@
+concept,column,start_date,end_date,concept_modified
+Patient,LastNewsStatus,LastNewsDate,,
+TumorPathologyEvent,Type,StartDate,EndDate,
+TumorPathologyEvent,TopographyCode,StartDate,EndDate,
+TumorPathologyEvent,MorphologyCode,StartDate,EndDate,
+TumorPathologyEvent,Laterality,StartDate,EndDate,
+TNM,T,,,TNM
+TNM,N,,,TNM
+TNM,M,,,TNM
+TNM,TNMVersion,,,TNM
+TNM,TNMType,,,TNM
+Treatment,Instance_Id,StartDate,,
+Drug,Code,,,Treatment
+Treatment,Type,StartDate,EndDate,Treatment
+Treatment,SurgeryResectionQuality,StartDate,EndDate,Treatment
+ResponseEvaluation,Status,Date,Date,Treatment
